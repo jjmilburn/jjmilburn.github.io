@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Tale of Two Toolchains - Migrating from Atollic to Eclipse
+title: A Tale of Two Toolchains - Atollic to Eclipse
 ---
 
 In the course of working with STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.
