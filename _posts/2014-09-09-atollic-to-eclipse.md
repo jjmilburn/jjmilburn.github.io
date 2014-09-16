@@ -3,53 +3,72 @@ layout: post
 title: A Tale of Two Toolchains - Atollic to Eclipse
 ---
 
-In the course of working with STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.
+In the course of working with Cortex M0 STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.  This post will take you step-by-step through setting up an environment in Eclipse that will allow you to generate relatively small, size optimized binaries (for the binaries this is tested with, within 2kB of what Atollic generates).
 
 -----
 
-Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+Eclipse CDT and Cortex M0
 
-> Curabitur blandit tempus porttitor. **Nullam quis risus eget urna mollis** ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
+1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  
 
-Etiam porta *sem malesuada magna* mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+2) Ignore everything you read about CodeLite/CodeSourcery.  You want a cross-ARM toolchain that supports newlib-nano, for the size-optimized nano libraries.  Specifically, you want "GNU Tools for Embedded Processors (gcc-arm-embedded); download the latest precompiled toolchain (or source, if you are feeling masochistic today) from [LaunchPad](https://launchpad.net/gcc-arm-embedded).  It's maintained by ARM employees so hopefully it isn't broken.  I've tested a working binary created on release [2014-q2](https://launchpad.net/gcc-arm-embedded/+milestone/4.8-2014-q2-update)
 
-## Heading
+*[Embedded Toolchain Diagram](http://avr-eclipse.sourceforge.net/user%20manual/concepts/toolchain.html)*
 
-Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+3) Pull the payg-firmware repository (if you aren't sure on this, check out the [git](https://github.com/angaza/payg-hardware/wiki/Software-Tools#git) page), and copy the following directory and contents somewhere locally for now:
+[Some M0 Source Code](https://github.com/angaza/payg-firmware/tree/dev-apc-neo/STM32-Atollic/STM32-Atollic-42/APC_ULC)
 
-### Sub-heading
+4) Launch Eclipse CDT, and go to "File->Import" to import this project into the workspace.
 
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+5) Right click on the project name (in this case, it will be "APC_ULC" if it recognized it correctly), and go to "Properties"
+- Click on "C/C++ Build", and note the "Configuration" at the top of the dialog, this is the name of this configuration to which these settings are saved.  It is likely "Default [Active]"
+- Under "C/C++ Build" on the "Builder Settings" tab, set the Builder Type to "Internal Builder"
 
-{% highlight js %}
-// Example can be run directly in your JavaScript console
+6) Under the "C/C++ Build" category, click on "Settings", then "Toolchains".  Ensure that the name of the toolchain contains a mention of "arm-none-eabi-gcc"
 
-// Create a function that takes two arguments and returns the sum of those arguments
-var adder = new Function("a", "b", "return a + b");
+7) Click the "Use Global Toolchain Path", and navigate to the /bin folder of the toolchain code downloaded and extracted in  step 2.  For example, "/home/josh/Development/gcc-arm-none-eabi-4_8-2014q2/bin".
 
-// Call the function
-adder(2, 6);
-// > 8
-{% endhighlight %}
+8) Under "Settings" -> "Tool Settings", set the following:
 
-Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
+**Target Processor**
+* ARM family to "cortex-m0"
+* Instruction set to "Thumb"
 
-### Sub-heading
+**Optimization**
+* Optimize level "-Os" (optimize size)
+* Enable "Function Sections" (-ffunction-sections)
+* Enable "Data Sections" (-fdata-sections) 
 
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+**Warnings**
+* Set "Enable all common warnings (-Wall)"
 
-* Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-* Donec id elit non mi porta gravida at eget metus.
-* Nulla vitae elit libero, a pharetra augue.
+**Debugging**
+* Set Debug Level to "None"
 
-Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.
+**Cross ARM GNU Assembler**
+* Under "Preprocessor", enable "Use Preprocessor" and "Do not search system directories (-nostdinc)"
+* Ensure that nothing is listed under the "Includes" path, "Warnings" flags, or "Miscellaneous" flags here
 
-1. Vestibulum id ligula porta felis euismod semper.
-2. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-3. Maecenas sed diam eget risus varius blandit sit amet non magna.
+**Cross ARM C Compiler**
+* Under "Preprocessor", add any symbols that are necessary for your project from Atollic
+* Add library paths to the processor-specific header files for the processor which you are building.  In the case of the Cortex-MO, this is likely three folders, with names like "/CMSIS/Device/ST/STM32F0xx/Include", "CMSIS/Include", and "STM32F0xx_StdPeriph_Driver/inc"
+* Add library paths to your own code header files as well
+* Under "Optimization", set the toolchain language to GNU ISO C90
 
-Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.
+**Cross ARM C Linker**
+* Under "General", enable "Remove unused sections (-Xlinker -gc-sections)"
+* Under "General", add the script file (which will be executed with "-T") for your processor.  For the STM32, use "stm32_flash.ld"
+* Under "Other Linker Flags", add the following:
+```
+-Wl,--start-group -lc -lm -Wl,--end-group -static -Wl,-cref,-u,Reset_Handler
+```
+
+**Post Build Commands**
+The above commands will allow Eclipse to generate an .elf file.  To generate a bin or hex, use whatever tool you find most preferable.
+
+*Disabling Debug Symbols*
+- The BlinkyLED project is probably too large (flash overflow) when targetted against an F4.  Follow the steps here to disable debug symbols:
+http://wiki.wxwidgets.org/Eclipse,_CDT_%26_MingW_%26_MSYS_Setup_Guide#Changing_the_Build_Configuration
 
 -----
-
-Want to see something else added? <a href="https://github.com/mdo/hyde/issues/new">Open an issue.</a>
+[Operators and C Syntax](http://www.tutorialspoint.com/cprogramming/c_operators.htm)
