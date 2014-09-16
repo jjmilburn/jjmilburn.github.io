@@ -7,7 +7,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 -----
 
-Eclipse CDT and Cortex M0
+#Eclipse CDT and Cortex M0#
 
 1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  
 
@@ -15,8 +15,7 @@ Eclipse CDT and Cortex M0
 
 *[Embedded Toolchain Diagram](http://avr-eclipse.sourceforge.net/user%20manual/concepts/toolchain.html)*
 
-3) Pull the payg-firmware repository (if you aren't sure on this, check out the [git](https://github.com/angaza/payg-hardware/wiki/Software-Tools#git) page), and copy the following directory and contents somewhere locally for now:
-[Some M0 Source Code](https://github.com/angaza/payg-firmware/tree/dev-apc-neo/STM32-Atollic/STM32-Atollic-42/APC_ULC)
+3) Get a copy of whatever project you've successfully developed in Atollic, that you wish to port to this toolchain.
 
 4) Launch Eclipse CDT, and go to "File->Import" to import this project into the workspace.
 
@@ -31,42 +30,52 @@ Eclipse CDT and Cortex M0
 8) Under "Settings" -> "Tool Settings", set the following:
 
 **Target Processor**
+
 * ARM family to "cortex-m0"
 * Instruction set to "Thumb"
 
 **Optimization**
+
 * Optimize level "-Os" (optimize size)
 * Enable "Function Sections" (-ffunction-sections)
 * Enable "Data Sections" (-fdata-sections) 
 
 **Warnings**
+
 * Set "Enable all common warnings (-Wall)"
 
 **Debugging**
+
 * Set Debug Level to "None"
 
 **Cross ARM GNU Assembler**
+
 * Under "Preprocessor", enable "Use Preprocessor" and "Do not search system directories (-nostdinc)"
 * Ensure that nothing is listed under the "Includes" path, "Warnings" flags, or "Miscellaneous" flags here
 
 **Cross ARM C Compiler**
+
 * Under "Preprocessor", add any symbols that are necessary for your project from Atollic
 * Add library paths to the processor-specific header files for the processor which you are building.  In the case of the Cortex-MO, this is likely three folders, with names like "/CMSIS/Device/ST/STM32F0xx/Include", "CMSIS/Include", and "STM32F0xx_StdPeriph_Driver/inc"
 * Add library paths to your own code header files as well
 * Under "Optimization", set the toolchain language to GNU ISO C90
 
 **Cross ARM C Linker**
+
 * Under "General", enable "Remove unused sections (-Xlinker -gc-sections)"
 * Under "General", add the script file (which will be executed with "-T") for your processor.  For the STM32, use "stm32_flash.ld"
 * Under "Other Linker Flags", add the following:
+
 ```
 -Wl,--start-group -lc -lm -Wl,--end-group -static -Wl,-cref,-u,Reset_Handler
 ```
 
 **Post Build Commands**
+
 The above commands will allow Eclipse to generate an .elf file.  To generate a bin or hex, use whatever tool you find most preferable.
 
 *Disabling Debug Symbols*
+
 - The BlinkyLED project is probably too large (flash overflow) when targetted against an F4.  Follow the steps here to disable debug symbols:
 http://wiki.wxwidgets.org/Eclipse,_CDT_%26_MingW_%26_MSYS_Setup_Guide#Changing_the_Build_Configuration
 
