@@ -8,16 +8,16 @@ This is a brief outline of the steps taken to get sample code from the Atmel ASF
 
 #Prerequisite Hardware
 
-* ["Atmel SAM D20 Xplained Pro Evaluation Kit (ATSAMD20-XPRO)"](http://www.atmel.com/Images/Atmel-42147-SAM-D20-Getting-Started-with-SAMD20_Application-Note_AT03293.pdf);
-* [SAMD20 Datasheet](http://www.atmel.com/Images/Atmel-42129-SAM-D20_Datasheet.pdf);
+* ["Atmel SAM D20 Xplained Pro Evaluation Kit (ATSAMD20-XPRO)"](http://www.atmel.com/Images/Atmel-42147-SAM-D20-Getting-Started-with-SAMD20_Application-Note_AT03293.pdf)
+* [SAMD20 Datasheet](http://www.atmel.com/Images/Atmel-42129-SAM-D20_Datasheet.pdf)
 
 #Software Installation
 
-* [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  This guide was written for Eclipse Kepler, install this first.
+* [Eclipse CDT](http://www.eclipse.org/cdt/) this is an Eclipse IDE tailored to C/C++ development.  This guide was written for Eclipse Kepler, install this first.
 
-* [GNU Tools for Embedded Processors](https://launchpad.net/gcc-arm-embedded); this is a toolchain that has worked on Cortex M0/M0+ processors.  This guide is tested using version 2014-q2.
+* [GNU Tools for Embedded Processors](https://launchpad.net/gcc-arm-embedded) this is a toolchain that has worked on Cortex M0/M0+ processors.  This guide is tested using version 2014-q2.
 
-* Atmel makes the ["Atmel Software Framework"](http://www.atmel.com/tools/AVRSOFTWAREFRAMEWORK.aspx);, available which provides plenty of actual code to begin working on the SAMD20 board.  Download this file; its large (200MB).  This guide was written for version 3.19.0 ("xdk-asf-3.19.0").
+* Atmel makes the ["Atmel Software Framework"](http://www.atmel.com/tools/AVRSOFTWAREFRAMEWORK.aspx), available which provides plenty of actual code to begin working on the SAMD20 board.  Download this file; its large (200MB).  This guide was written for version 3.19.0 ("xdk-asf-3.19.0").
 
 * [OpenOCD 0.9.0](http://sourceforge.net/p/openocd/tickets/milestone/0.9.0/) is used to actually connect to the board.  To install this, follow the instructions at https://plus.google.com/+AndreyYurovsky/posts/5JTehC7ngTq, transcribed here for convenience:
 
@@ -49,7 +49,7 @@ Now, obtain the OpenOCD source code, and build it:
     ./configure
 
 The output at this point (after ./configure) should look like the following image.  Specifically, note that CMSIS-DAP support is present:
-[OpenOCD_CMSIS-DAP](/assets/images/OpenOCD_CMSIS-DAP.png)
+![OpenOCD_CMSIS-DAP](/assets/images/OpenOCD_Config_CMSIS.png)
 
     make
     sudo make install
