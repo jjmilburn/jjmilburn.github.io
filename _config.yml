@@ -1,11 +1,11 @@
-title:        Conflagrant
-tagline:      'Quick and dirty.'
-description:  'Burning. Made by <a href="https://twitter.com/joshuajmilburn" target="_blank">@joshuajmilburn</a>.'
+title:        
+tagline:      'Unalarming Discursions'
+description:  'Engineering Field Notes. Made by <a href="https://twitter.com/joshuajmilburn" target="_blank">@joshuajmilburn</a>.'
 url:          http://jjmilburn.github.io
 version:      0.9.0
 author:
   name:       'Josh Milburn'
-  email:      'jayjaymilburn@gmail.com, change the first syllables to letters.'
+  email:      'jay-j4y-milburn@gmail.com, change the first syllables to letters, and remove the marks.'
 markdown:     rdiscount
 permalink:    pretty
 pygments:     true
