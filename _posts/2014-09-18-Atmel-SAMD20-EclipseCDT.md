@@ -51,6 +51,8 @@ Now, obtain the OpenOCD source code, and build it:
 The output at this point (after ./configure) should look like the following image.  Specifically, note that CMSIS-DAP support is present:
 ![OpenOCD_CMSIS-DAP](/assets/images/OpenOCD_Config_CMSIS.png)
 
+Then run:
+
     make
     sudo make install
 
@@ -99,13 +101,13 @@ At this point, if you receive an error indicating "unable to open CMSIS-DAP devi
 * From here, navigate to the directory where you downloaded/unzipped the ASF; for me, its called "xdk-asf-3.19.0"
 * Navigate to the LED Toggle example project for SAMD20 Xplained, which is found at:
     xdf-asf-3.19.0/sam0/applications/led_toggle/samd20_xplained_pro/gcc
-[Import SAMD20 Example](Import_SAMD20_Example.png)
+![Import SAMD20 Example](/assets/images/Import_SAMD20_Example.png)
 
 * Click "Copy Projects into Workspace", and click Finish.
 
 At this point, the project should be in your workspace, and a directory structure something like the following image, without the binaries is likely what shows up in the project tree:
 
-[Project Tree](SAMD20_Project_Tree.png)
+![Project Tree](/assets/images/SAMD20_Project_Tree.png)
 
 Note that "config.mk" and "Makefile" are both here, these are important.
 
@@ -137,7 +139,7 @@ Change this section to the correct path, as here:
 Next, right click on the project, and go to properties.  From the C/C++ Build section, under "Builder Settings",
 uncheck "Use Default Build Command", and type "make -f Makefile" instead, as in the following image:
 
-[CDT Builder Makefile Dialog](CDT_Builder_Makefile.png)
+![CDT Builder Makefile Dialog](/assets/images/CDT_Builder_Makefile.png)
 
 Now, apply the change, refresh the project, and attempt to build.  With any luck, you'll end up with a successful build, producing .elf and .hex files that can then be used to program the board.
 
@@ -155,7 +157,11 @@ Next, open another terminal, and navigate to the Eclipse workspace where your pr
 
     arm-none-eabi-gdb -ex "target remote localhost:3333" -ex "mon reset halt" low_power_flash.elf
 
-This will cause some additional lines of output to appear in your OpenOCD window; this is expected.  Next, in gdb, type the following:
+This will cause some additional lines of output to appear in your OpenOCD window; this is expected.  See the below:
+
+![OpenOCD After GDB](/assets/images/OpenOCD_AfterGDB.png)
+
+Next, in gdb, type the following:
 
     load
     mon reset init
