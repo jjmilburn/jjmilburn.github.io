@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Tale of Two Toolchains - Atollic to Eclipse
+title: Importing Atollic C Projects to Eclipse
 ---
 
 In the course of working with Cortex M0 STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.  This post will take you step-by-step through setting up an environment in Eclipse that will allow you to generate relatively small, size optimized binaries (for the binaries this is tested with, within 2kB of what Atollic generates).
