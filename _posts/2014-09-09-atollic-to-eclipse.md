@@ -19,7 +19,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 4) Launch Eclipse CDT, and go to "File->Import" to import this project into the workspace.
 
-5) Right click on the project name (in this case, it will be "APC_ULC" if it recognized it correctly), and go to "Properties"
+5) Right click on the project name, and go to "Properties"
 - Click on "C/C++ Build", and note the "Configuration" at the top of the dialog, this is the name of this configuration to which these settings are saved.  It is likely "Default [Active]"
 - Under "C/C++ Build" on the "Builder Settings" tab, set the Builder Type to "Internal Builder"
 
