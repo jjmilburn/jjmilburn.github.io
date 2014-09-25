@@ -9,7 +9,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 #Eclipse CDT and Cortex M0#
 
-1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  
+1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  AFter installing Eclipse CDT, go to "Help", and "Install New Software".  Add http://gnuarmeclipse.sourceforge.net/updates to the "Work with" path, and select the available update.  Install this, and restart Eclipse.  **Tested on Kepler**.
 
 2) Ignore everything you read about CodeLite/CodeSourcery.  You want a cross-ARM toolchain that supports newlib-nano, for the size-optimized nano libraries.  Specifically, you want "GNU Tools for Embedded Processors (gcc-arm-embedded); download the latest precompiled toolchain (or source, if you are feeling masochistic today) from [LaunchPad](https://launchpad.net/gcc-arm-embedded).  It's maintained by ARM employees so hopefully it isn't broken.  I've tested a working binary created on release [2014-q2](https://launchpad.net/gcc-arm-embedded/+milestone/4.8-2014-q2-update)
 
