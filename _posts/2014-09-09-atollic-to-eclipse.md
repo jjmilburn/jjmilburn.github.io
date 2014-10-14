@@ -9,7 +9,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 #Eclipse CDT and Cortex M0#
 
-1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  
+1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  AFter installing Eclipse CDT, go to "Help", and "Install New Software".  Add http://gnuarmeclipse.sourceforge.net/updates to the "Work with" path, and select the available update.  Install this, and restart Eclipse.  **Tested on Kepler**.
 
 2) Ignore everything you read about CodeLite/CodeSourcery.  You want a cross-ARM toolchain that supports newlib-nano, for the size-optimized nano libraries.  Specifically, you want "GNU Tools for Embedded Processors (gcc-arm-embedded); download the latest precompiled toolchain (or source, if you are feeling masochistic today) from [LaunchPad](https://launchpad.net/gcc-arm-embedded).  It's maintained by ARM employees so hopefully it isn't broken.  I've tested a working binary created on release [2014-q2](https://launchpad.net/gcc-arm-embedded/+milestone/4.8-2014-q2-update)
 
@@ -19,7 +19,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 4) Launch Eclipse CDT, and go to "File->Import" to import this project into the workspace.
 
-5) Right click on the project name (in this case, it will be "APC_ULC" if it recognized it correctly), and go to "Properties"
+5) Right click on the project name, and go to "Properties"
 - Click on "C/C++ Build", and note the "Configuration" at the top of the dialog, this is the name of this configuration to which these settings are saved.  It is likely "Default [Active]"
 - Under "C/C++ Build" on the "Builder Settings" tab, set the Builder Type to "Internal Builder"
 
