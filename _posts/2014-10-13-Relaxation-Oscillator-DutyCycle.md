@@ -24,7 +24,7 @@ Note that in this example, R1-R3 are 510k, C1 is 8.2nF, R4 is 330k, and R5 is th
 
 #Testing
 
-Wire up the comparator/op-amp, and take a look on your scope.  The pulse width seen at the output 
+Wire up the comparator/op-amp, and take a look on your scope.  The pulse width seen at the output should have a variable duty cycle. This is a direct result of the time constant for charging C1 being smaller than the time constant for C1 to discharge (due to the diode allowing for a parallel resistance only when C1 is charging). 
 
 #Uses
 
