@@ -18,8 +18,8 @@ title: Relaxation Oscillator with Variable Duty Cycle
 
 Wire up the circuit like this:
 
-<a href="http://everycircuit.com/circuit/6290233901449216">Relaxation Oscillator - EveryCircuit</a><br>
-
+<a href="http://everycircuit.com/circuit/6290233901449216">Relaxation Oscillator - EveryCircuit</a><br> <iframe width="560" height="360" src="http://everycircuit.com/embed/6290233901449216" frameborder="0"></iframe>
+ 
 Note that in this example, R1-R3 are 510k, C1 is 8.2nF, R4 is 330k, and R5 is the combination of 50k and 30k -- simulation is a bit wonky when it comes to making this converge.
 
 #Testing
