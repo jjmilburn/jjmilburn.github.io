@@ -4,6 +4,7 @@ title: Relaxation Oscillator with Variable Duty Cycle
 ---
 
 A "Relaxation Oscillator" is just a fancy name for a circuit which generates a repetitive output signal (Wikipedia says this must be nonsinusoidal).  Most examples are for 50% duty cycle designs.  Here, build one using the [NXP NXC2200](http://www.nxp.com/documents/data_sheet/NCX2200.pdf).
+
 -----
 
 #Components

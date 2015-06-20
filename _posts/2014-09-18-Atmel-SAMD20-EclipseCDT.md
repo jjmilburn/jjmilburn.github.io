@@ -3,7 +3,8 @@ layout: post
 title: Building for the Atmel "SAMD20 Xplained Pro" in Ubuntu 14.04
 ---
 
-This is a brief outline of the steps taken to get sample code from the Atmel ASF for the "SAMD20 Xplained Pro" built and flashed to the board from Ubuntu 14.04.  Much of this guide is built around insights from [AndreyYurovsky](https://plus.google.com/+AndreyYurovsky/posts/5JTehC7ngTq) and [V. Kornilov Matwey](http://blog.matwey.name/2013/12/atmel-atsamd20-xpro.html).  
+This is a brief outline of the steps taken to get sample code from the Atmel ASF for the "SAMD20 Xplained Pro" built and flashed to the board from Ubuntu 14.04.  Much of this guide is built around insights from [AndreyYurovsky](https://plus.google.com/+AndreyYurovsky/posts/5JTehC7ngTq) and [V. Kornilov Matwey](http://blog.matwey.name/2013/12/atmel-atsamd20-xpro.html). 
+
 -----
 
 #Prerequisite Hardware
