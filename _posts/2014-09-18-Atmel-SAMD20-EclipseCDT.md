@@ -7,12 +7,12 @@ This is a brief outline of the steps taken to get sample code from the Atmel ASF
 
 -----
 
-#Prerequisite Hardware
+###Prerequisite Hardware
 
 * ["Atmel SAM D20 Xplained Pro Evaluation Kit (ATSAMD20-XPRO)"](http://www.atmel.com/Images/Atmel-42147-SAM-D20-Getting-Started-with-SAMD20_Application-Note_AT03293.pdf)
 * [SAMD20 Datasheet](http://www.atmel.com/Images/Atmel-42129-SAM-D20_Datasheet.pdf)
 
-#Software Installation
+###Software Installation
 
 * [Eclipse CDT](http://www.eclipse.org/cdt/) this is an Eclipse IDE tailored to C/C++ development.  This guide was written for Eclipse Kepler, install this first.
 
@@ -96,7 +96,7 @@ This indicates that OpenOCD is successfully connected to the board; more specifi
 
 At this point, if you receive an error indicating "unable to open CMSIS-DAP device", try a different USB port (or try unplugging other USB devices).Also, confirm that 'Atmel Corp.' appears in lsusb when the board is plugged in.
 
-## Importing ASF Example into Eclipse
+### Importing ASF Example into Eclipse
 
 * Launch Eclipse CDT, and navigate to "File->Import".  Select "Existing Projects into Workspace" from "General".
 * From here, navigate to the directory where you downloaded/unzipped the ASF; for me, its called "xdk-asf-3.19.0"
@@ -170,6 +170,6 @@ Next, in gdb, type the following:
 
 Now, pressing the SW0 button (not the reset button) on the SAMD20 Xplained Pro dev board will light LED0.  
 
-## Next Steps
+### Next Steps
 
 To experiment, look at the "config.mk" file, and see where the source files are being pulled from -- to build your own files, just modify these entires in config.mk, and have at it.
