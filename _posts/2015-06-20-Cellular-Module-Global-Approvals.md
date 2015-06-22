@@ -17,7 +17,7 @@ The [GCF](http://www.globalcertificationforum.org/) ("Global Certification Forum
 
 ###Type Approvals
 
-Typically, these are approvals that are required to market and/or sell a device within a given country.  For example, the [Pakistan Telecommunications AUthority](http://www.pta.gov.pk/index.php?Itemid=180) notes that:
+Typically, these are approvals that are required to market and/or sell a device within a given country.  For example, the [Pakistan Telecommunications Authority](http://www.pta.gov.pk/index.php?Itemid=180) notes that:
 
 	Under the Telecom Act 1996 (section 29), no terminal equipment can be directly or indirectly connected with PSTN unless it has been type approved by 	PTA.
 
