@@ -57,7 +57,7 @@ guest VM to have any direct USB peripheral access to the host.
 ## Asides
 
 * [`PySerial`](https://pypi.python.org/pypi/pyserial) is an extremely useful library for abstracting away most of the
-complexities involved with programatically accessing a serial port for UART
+complexities involved with programmatically accessing a serial port for UART
 communications.
 
 * If also occasionally using the serial port outside of the virtual machine,
