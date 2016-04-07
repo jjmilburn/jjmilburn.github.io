@@ -15,9 +15,11 @@ guide is written for a *nix host platform (Ubuntu).
 ### First Things First
 
 The adapter which was used to test this approach is similar to the
-[USB to TTL Serial Cable](https://www.adafruit.com/products/954) available on Adafruit; but any adapter should work.
+[USB to TTL Serial Cable](https://www.adafruit.com/products/954) available on Adafruit; but any similar adapter should work.
 
-1. Plug in the USB->Serial adapter, and ensure that 
+### Step-By-Step
+
+1. Plug in the USB->Serial adapter, and ensure that it shows up under `lsusb`, as well as creating a device entry similar to `/dev/ttyUSB*` .
 
 2.  Once the adapter is plugged in, execute `chmod 666 /dev/ttyUSB0` (substituting ttyUSB0 for whatever USB* port the adapter enumerated to) on the host machine.  Determine the adapter by observing what new entry is added to the output 
 of `ls /dev/ttyUSB*` when the adapter is plugged into the host machine.
