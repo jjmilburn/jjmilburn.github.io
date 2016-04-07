@@ -3,7 +3,7 @@ layout: post
 title: Sharing a Prolific USB->UART Converter with VirtualBox
 ---
 
-While creating a UART protocol for use in a new product here at Angaza, it
+While creating a UART protocol for use in a new product, it
 became useful to connect a serial adapter from my host PC to the Vagrant
 environment which held the protocol code and its dependencies.  This approach
 should work regardless of the UART converter model/brand (Prolific, FTDI, etc)
