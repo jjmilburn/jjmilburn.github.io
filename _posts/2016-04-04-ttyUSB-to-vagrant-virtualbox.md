@@ -66,5 +66,5 @@ the host is passing the serial port directly through to the VM) there will be
 problems attempting to use it on the host at the same time.
 
 * This approach might not be suitable for near-realtime response requirements
-on the serial lines; in testing.
+on the serial lines.
 
