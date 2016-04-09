@@ -36,7 +36,7 @@ port of `/dev/ttyS3`), leave IRQ and I/O port as their defaults, select
 on the *Host* machine under "Port/File Path".  In this example, this is
 `/dev/ttyUSB0`.
 
-[Screenshot here]
+![VirtualBox Serial Port Settings](/assets/images/Vbox_Serial_Port.png)
 
 4. On the guest `sudo adduser $USER dialout` will add the guest user to a group
 which has access to the serial port interfaces (e.g. /dev/ttyS*).  Execute this command, then log out and back into the guest machine.
