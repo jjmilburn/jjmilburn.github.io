@@ -7,12 +7,12 @@ This is a brief outline of the steps taken to get sample code from the Atmel ASF
 
 -----
 
-###Prerequisite Hardware
+### Prerequisite Hardware
 
 * ["Atmel SAM D20 Xplained Pro Evaluation Kit (ATSAMD20-XPRO)"](http://www.atmel.com/Images/Atmel-42147-SAM-D20-Getting-Started-with-SAMD20_Application-Note_AT03293.pdf)
 * [SAMD20 Datasheet](http://www.atmel.com/Images/Atmel-42129-SAM-D20_Datasheet.pdf)
 
-###Software Installation
+### Software Installation
 
 * [Eclipse CDT](http://www.eclipse.org/cdt/) this is an Eclipse IDE tailored to C/C++ development.  This guide was written for Eclipse Kepler, install this first.
 
@@ -144,7 +144,7 @@ uncheck "Use Default Build Command", and type "make -f Makefile" instead, as in 
 
 Now, apply the change, refresh the project, and attempt to build.  With any luck, you'll end up with a successful build, producing .elf and .hex files that can then be used to program the board.
 
-## Installing Program to SAMD20 Xplained Pro
+### Installing Program to SAMD20 Xplained Pro
 
 We'll use gdb for this step, so run the following:
 

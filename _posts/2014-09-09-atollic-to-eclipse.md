@@ -7,7 +7,7 @@ In the course of working with Cortex M0 STM32 microcontrollers, it became necess
 
 -----
 
-###Eclipse CDT and Cortex M0###
+### Eclipse CDT and Cortex M0
 
 1) Get [Eclipse CDT](http://www.eclipse.org/cdt/); this is an Eclipse IDE tailored to C/C++ development.  AFter installing Eclipse CDT, go to "Help", and "Install New Software".  Add http://gnuarmeclipse.sourceforge.net/updates to the "Work with" path, and select the available update.  Install this, and restart Eclipse.  **Tested on Kepler**.
 

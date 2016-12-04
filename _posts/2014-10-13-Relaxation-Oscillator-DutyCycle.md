@@ -7,7 +7,7 @@ A "Relaxation Oscillator" is just a fancy name for a circuit which generates a r
 
 -----
 
-###Components
+### Components
 
 * Comparator (op-amp will work too)
 * 3x equal value resistors (R1-R3)
@@ -22,15 +22,15 @@ Wire up the circuit like this:
  
 Note that in this example, R1-R3 are 510k, C1 is 8.2nF, R4 is 330k, and R5 is the combination of 50k and 30k -- simulation is a bit wonky when it comes to making this converge.
 
-###Testing
+### Testing
 
 Wire up the comparator/op-amp, and take a look on your scope.  The pulse width seen at the output should have a variable duty cycle. This is a direct result of the time constant for charging C1 being smaller than the time constant for C1 to discharge (due to the diode allowing for a parallel resistance only when C1 is charging). 
 
-###Uses
+### Uses
 
 Timing circuits, periodic enable lines (or wakeups), triggers for sampling, etc.  The shorter on-time can allow for lower quiescent current when attempting to enable a power-hungry device that doesn't need to be on for the full 50% duty cycle.
 
-###Additional Notes
+### Additional Notes
 
 - The quiescent current of this circuit can get fairly low; on the order of microamps, depending on component selection.
 
