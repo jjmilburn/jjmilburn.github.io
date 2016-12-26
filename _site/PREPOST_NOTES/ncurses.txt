@@ -1,0 +1,5 @@
+why and how we upgraded to an ncurses UI
+
+* Designate an area of the screen for UI
+* smiley/frowny emoji (and manufacturer rec on this)
+

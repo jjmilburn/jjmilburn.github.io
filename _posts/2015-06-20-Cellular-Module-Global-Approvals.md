@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Beyond FCC: Exploring International RF Regulations
+title: Beyond FCC - Exploring International RF Regulations
 ---
 
 While hardware which intentionally radiates RF falls under [FCC Part 15](http://www.digikey.com/en/articles/techzone/2011/mar/the-fcc-road-part-15-from-concept-to-approval) in the US, other countries might not be so clear.  This post introduces a few of the regulatory frameworks and bodies operative outside of the US which apply to GSM/cellular communications.

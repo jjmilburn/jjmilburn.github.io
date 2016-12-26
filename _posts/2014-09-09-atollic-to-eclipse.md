@@ -1,11 +1,8 @@
 ---
 layout: post
 title: Importing Atollic C Projects to Eclipse
+excerpt: <p>In the course of working with Cortex M0 STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.</p>
 ---
-
-In the course of working with Cortex M0 STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.  This post will take you step-by-step through setting up an environment in Eclipse that will allow you to generate relatively small, size optimized binaries (for the binaries this is tested with, within 2kB of what Atollic generates).
-
------
 
 ### Eclipse CDT and Cortex M0
 
@@ -80,5 +77,6 @@ The above commands will allow Eclipse to generate an .elf file.  To generate a b
 http://wiki.wxwidgets.org/Eclipse,_CDT_%26_MingW_%26_MSYS_Setup_Guide#Changing_the_Build_Configuration
 
 -----
+
 **References**
 [Operators and C Syntax](http://www.tutorialspoint.com/cprogramming/c_operators.htm)

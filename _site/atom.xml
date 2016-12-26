@@ -1,77 +1,541 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Hyde</title>
- <link href="http://andhyde.com/atom.xml" rel="self"/>
- <link href="http://andhyde.com/"/>
- <updated>2014-09-09T23:14:45-07:00</updated>
- <id>http://andhyde.com</id>
+ <title></title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2016-12-25T17:17:24-08:00</updated>
+ <id>http://localhost:4000</id>
  <author>
-   <name></name>
-   <email></email>
+   <name>Josh Milburn</name>
+   <email>jay-j4y-milburn@gmail.com, change the first syllables to letters, and remove the marks.</email>
  </author>
 
  
  <entry>
-   <title>Tale</title>
-   <link href="http://andhyde.com/2014/09/09/atollic-to-eclipse/"/>
-   <updated>2014-09-09T00:00:00-07:00</updated>
-   <id>http://andhyde.com/2014/09/09/atollic-to-eclipse</id>
-   <content type="html">&lt;p&gt;In the course of working with STM32 microcontrollers, it became necessary to modify and build firmware without having direct access to Atollic TrueSTUDIO.  This post outlines the steps taken to successfully build code that performs the same function, and fits in (approximately) the same footprint, using Eclipse CDT.&lt;/p&gt;
+   <title>The Basics - Certifying a Cellular Product in the US</title>
+   <link href="http://localhost:4000/2016/12/03/Cell-Module-US-Certification/"/>
+   <updated>2016-12-03T00:00:00-08:00</updated>
+   <id>http://localhost:4000/2016/12/03/Cell-Module-US-Certification</id>
+   <content type="html">&lt;p&gt;Even if your nifty new GSM module has an FCC certification, it doesn’t mean
+the integrated product is fine to sell on the open market.  This post pulls
+together estimates from various sources to gain a rough estimate of total cost
+for RF-related certification on a product using a pre-certified cellular
+module.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;Cum sociis natoque penatibus et magnis &lt;a href=&quot;#&quot;&gt;dis parturient montes&lt;/a&gt;, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
+&lt;p&gt;First, lets be clear – I’m not a legal expert on cellular certifications, and
+the information in this post is meant to be informative, not a complete guide
+to what you need to cerify a GSM product in the US.  With that in mind, lets
+proceed…&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;Curabitur blandit tempus porttitor. &lt;strong&gt;Nullam quis risus eget urna mollis&lt;/strong&gt; ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&quot;untitled-header-section&quot;&gt;Untitled Header Section&lt;/h3&gt;
 
-&lt;p&gt;Etiam porta &lt;em&gt;sem malesuada magna&lt;/em&gt; mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
+&lt;p&gt;If you intend to sell a product with radio communication in the EU, &lt;a href=&quot;http://www.tuv.com/en/usa/services_usa/product_testing/telecom_it/rtte_directive/rtte_directive.html&quot;&gt;R&amp;amp;TTE&lt;/a&gt; compliance will likely be required.  GSM/M2M modules can be &lt;a href=&quot;http://www.tuv-sud.co.uk/uploads/images/1365171464129234960088/uk-mkg-guide-to-wireless-m2m-module-integration-en-uk.pdf&quot;&gt;individually certified as compliant with R&amp;amp;TTE&lt;/a&gt;, which reduces the testing burden.  A number of third party test facilities (TUV, 7-Layers, IB Lenhardt, etc.) exist which can help take a product through the R&amp;amp;TTE certification process.&lt;/p&gt;
 
-&lt;h2&gt;Heading&lt;/h2&gt;
+&lt;h3 id=&quot;ptcrb&quot;&gt;PTCRB&lt;/h3&gt;
 
-&lt;p&gt;Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.&lt;/p&gt;
+&lt;p&gt;This was mentioned briefly in a previous post, but you can’t ignore this agency
+if planning to sell in the USA.  As mentioned previously, the cost for this
+certification runs between &lt;a href=&quot;http://m2msupport.net/m2msupport/ptcrb-process-costs-timeline-and-labs/&quot;&gt;$16k-20k for a data-only device&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Sharing a Prolific USB->UART Converter with VirtualBox</title>
+   <link href="http://localhost:4000/2016/04/04/ttyUSB-to-vagrant-virtualbox/"/>
+   <updated>2016-04-04T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2016/04/04/ttyUSB-to-vagrant-virtualbox</id>
+   <content type="html">&lt;p&gt;While creating a UART protocol for use in a new product, it
+became useful to connect a serial adapter from my host PC to the Vagrant
+environment which held the protocol code and its dependencies.  This approach
+should work regardless of the UART converter model/brand (Prolific, FTDI, etc)
+assuming that plugging the device in creates a &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyUSB[0-9]&lt;/code&gt; entry.  This
+guide is written for a *nix host platform (Ubuntu).&lt;/p&gt;
 
-&lt;h3&gt;Sub-heading&lt;/h3&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/p&gt;
+&lt;h3 id=&quot;first-things-first&quot;&gt;First Things First&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console&lt;/span&gt;
+&lt;p&gt;The adapter which was used to test this approach is similar to the
+&lt;a href=&quot;https://www.adafruit.com/products/954&quot;&gt;USB to TTL Serial Cable&lt;/a&gt; available on Adafruit; but any similar adapter should work.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those arguments&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;return a + b&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Call the function&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.&lt;/p&gt;
-
-&lt;h3&gt;Sub-heading&lt;/h3&gt;
-
-&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Praesent commodo cursus magna, vel scelerisque nisl consectetur et.&lt;/li&gt;
-&lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
-&lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.&lt;/p&gt;
+&lt;h3 id=&quot;step-by-step&quot;&gt;Step-By-Step&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
-&lt;li&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/li&gt;
-&lt;li&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Plug in the USB-&amp;gt;Serial adapter, and ensure that it shows up under &lt;code class=&quot;highlighter-rouge&quot;&gt;lsusb&lt;/code&gt;, as well as creating a device entry similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyUSB*&lt;/code&gt; .&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once the adapter is plugged in, execute &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 666 /dev/ttyUSB0&lt;/code&gt; (substituting ttyUSB0 for whatever USB* port the adapter enumerated to) on the host machine.  Determine the adapter by observing what new entry is added to the output 
+of &lt;code class=&quot;highlighter-rouge&quot;&gt;ls /dev/ttyUSB*&lt;/code&gt; when the adapter is plugged into the host machine.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;Alternately, ensure that the user running the VirtualBox on the host machine
+is in the &lt;code class=&quot;highlighter-rouge&quot;&gt;dialout&lt;/code&gt; group (&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo adduser $USER dialout&lt;/code&gt;).  This requires a
+logut/login cycle to take effect.&lt;/p&gt;
 
-&lt;p&gt;Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;In the VM VirtualBox Manager GUI, go to “Settings” for the machine which
+will receive access to the serial port, and navigate to the “Port 1” tab under
+“Serial Ports”. Set “Port Number” to “COM4” (corresponding to a guest VM serial
+port of &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyS3&lt;/code&gt;), leave IRQ and I/O port as their defaults, select
+“Host Device” as the Port Mode, and type the path to the serial port device
+on the &lt;em&gt;Host&lt;/em&gt; machine under “Port/File Path”.  In this example, this is
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyUSB0&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/Vbox_Serial_Port.png&quot; alt=&quot;VirtualBox Serial Port Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the guest &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo adduser $USER dialout&lt;/code&gt; will add the guest user to a group
+which has access to the serial port interfaces (e.g. /dev/ttyS*).  Execute this command, then log out and back into the guest machine.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ensure the TX/RX lines are connected together on the serial adapter for
+the next step (a loopback test from the guest VM).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Log into two separate terminal sessions on the guest VM, in the first
+session, type &lt;code class=&quot;highlighter-rouge&quot;&gt;cat /dev/ttyS3&lt;/code&gt;.  In the second terminal session, type
+&lt;code class=&quot;highlighter-rouge&quot;&gt;echo &quot;test&quot; &amp;gt; /dev/ttyS3&lt;/code&gt;.  If the serial device from the host is being
+successfully passed through to the guest, “test” should appear in the window
+where &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; is running.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;At this point, the guest VM has access to read and write to a USB serial adapter
+connected to the host machine.  Note that this approach does not require the
+guest VM to have any direct USB peripheral access to the host.&lt;/p&gt;
+
+&lt;h2 id=&quot;asides&quot;&gt;Asides&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://pypi.python.org/pypi/pyserial&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PySerial&lt;/code&gt;&lt;/a&gt; is an extremely useful library for abstracting away most of the
+complexities involved with programmatically accessing a serial port for UART
+communications.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If also occasionally using the serial port outside of the virtual machine,
+note that if the virtual machine is currently accessing the serial port (e.g.
+the host is passing the serial port directly through to the VM) there will be
+problems attempting to use it on the host at the same time.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;This approach might not be suitable for near-realtime response requirements
+on the serial lines.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Beyond FCC - Exploring International RF Regulations</title>
+   <link href="http://localhost:4000/2015/06/20/Cellular-Module-Global-Approvals/"/>
+   <updated>2015-06-20T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2015/06/20/Cellular-Module-Global-Approvals</id>
+   <content type="html">&lt;p&gt;While hardware which intentionally radiates RF falls under &lt;a href=&quot;http://www.digikey.com/en/articles/techzone/2011/mar/the-fcc-road-part-15-from-concept-to-approval&quot;&gt;FCC Part 15&lt;/a&gt; in the US, other countries might not be so clear.  This post introduces a few of the regulatory frameworks and bodies operative outside of the US which apply to GSM/cellular communications.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;Want to see something else added? &lt;a href=&quot;https://github.com/mdo/hyde/issues/new&quot;&gt;Open an issue.&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;rtte&quot;&gt;R&amp;amp;TTE&lt;/h3&gt;
+
+&lt;p&gt;If you intend to sell a product with radio communication in the EU, &lt;a href=&quot;http://www.tuv.com/en/usa/services_usa/product_testing/telecom_it/rtte_directive/rtte_directive.html&quot;&gt;R&amp;amp;TTE&lt;/a&gt; compliance will likely be required.  GSM/M2M modules can be &lt;a href=&quot;http://www.tuv-sud.co.uk/uploads/images/1365171464129234960088/uk-mkg-guide-to-wireless-m2m-module-integration-en-uk.pdf&quot;&gt;individually certified as compliant with R&amp;amp;TTE&lt;/a&gt;, which reduces the testing burden.  A number of third party test facilities (TUV, 7-Layers, IB Lenhardt, etc.) exist which can help take a product through the R&amp;amp;TTE certification process.&lt;/p&gt;
+
+&lt;h3 id=&quot;gcf&quot;&gt;GCF&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://www.globalcertificationforum.org/&quot;&gt;GCF&lt;/a&gt; (“Global Certification Forum”) operates under the ‘test once, use anywhere’ philosophy, and focuses on devices which communicate on the cellular network.  When sourcing a wireless module for a product intended for global use, checking if the module is listed in the GCF &lt;a href=&quot;http://www.globalcertificationforum.org/devices/certified-devices.html&quot;&gt;“Certified Devices List”&lt;/a&gt; provides some basic assurance that the module will be accepted onto most carrier networks without issue (in the US, however, the GCF equivalent is the “PTCRB”, mentioned at the end of this post).  When sourcing a GSM module, ensure it has passed GCF, or be sure that the carriers in the countries of intended operation don’t care either way.&lt;/p&gt;
+
+&lt;h3 id=&quot;type-approvals&quot;&gt;Type Approvals&lt;/h3&gt;
+
+&lt;p&gt;Typically, these are approvals that are required to market and/or sell a device within a given country.  For example, the &lt;a href=&quot;http://www.pta.gov.pk/index.php?Itemid=180&quot;&gt;Pakistan Telecommunications Authority&lt;/a&gt; notes that:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Under the Telecom Act 1996 (section 29), no terminal equipment can be directly or indirectly connected with PSTN unless it has been type approved by 	PTA.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This includes wireless modules, such as the popular SIM900/908 modules from SIMCOM.  Note on the &lt;a href=&quot;http://www.pta.gov.pk/media/ta/2g_3g_lte_mod_191214.pdf&quot;&gt;2G/3G Approved List&lt;/a&gt; that the PTA authorizes a specific ‘applicant’ to sell these modules in country.  For a different approach where the module appears to be listed without an applicant, note the Rwandan &lt;a href=&quot;http://www.rura.rw/fileadmin/docs/TYPE_APPROVED_mobile_handsets_2015.pdf&quot;&gt;Type Approved Mobile Phones&lt;/a&gt; from January 2015, where only the model name and manufacturer are listed.  Not all countries have a straightforward type-approval requirement:  India, for example, requires no type approval for GSM devices, but China potentially requires &lt;a href=&quot;http://www.7layers.com/#!/type-approval/type-approval-asia/p-r-of-china/&quot;&gt;up to three different government-regulated approvals&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;ptcrb&quot;&gt;PTCRB&lt;/h3&gt;
+
+&lt;p&gt;This agency is technically US-only, but it’s worth including here to highlight the fact that there are additional regulatory standards outside of the FCC that can apply to GSM-based products.  The organization is a consortium of participating wireless carriers (e.g. AT&amp;amp;T, Verizon) which exists to test expected mobile device performance on a carrier network, using 3GPP and carrier-specific standards.  In general, a carrier participating in PTCRB won’t allow a device which has not passed PTCRB certification to connect to it’s network at any reasonable scale.  This certification can cost between &lt;a href=&quot;http://m2msupport.net/m2msupport/ptcrb-process-costs-timeline-and-labs/&quot;&gt;$16k-20k for a data-only device&lt;/a&gt;. The interplay between FCC, PTCRB, and additional carrier-specific standards is briefly explored &lt;a href=&quot;http://www.ecnmag.com/articles/2012/07/cellular-carrier-certification-requirements&quot;&gt;here by ECNMag&lt;/a&gt;.  The TL:DR version: &lt;strong&gt;&lt;a href=&quot;https://www.ptcrb.com/vendor/complete/complete_request.cfm&quot;&gt;just use a PTCRB approved module&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Relaxation Oscillator with Variable Duty Cycle</title>
+   <link href="http://localhost:4000/2014/10/13/Relaxation-Oscillator-DutyCycle/"/>
+   <updated>2014-10-13T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2014/10/13/Relaxation-Oscillator-DutyCycle</id>
+   <content type="html">&lt;p&gt;A “Relaxation Oscillator” is just a fancy name for a circuit which generates a repetitive output signal (Wikipedia says this must be nonsinusoidal).  Most examples are for 50% duty cycle designs.  Here, build one using the &lt;a href=&quot;http://www.nxp.com/documents/data_sheet/NCX2200.pdf&quot;&gt;NXP NXC2200&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;components&quot;&gt;Components&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Comparator (op-amp will work too)&lt;/li&gt;
+  &lt;li&gt;3x equal value resistors (R1-R3)&lt;/li&gt;
+  &lt;li&gt;1x small signal diode&lt;/li&gt;
+  &lt;li&gt;1x capacitor in the 1-20nF range (C1)&lt;/li&gt;
+  &lt;li&gt;1x resistor in the 100 to 500k range (R4)&lt;/li&gt;
+  &lt;li&gt;1x resistor approximately 20% the size of R4 (R5)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Wire up the circuit like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://everycircuit.com/circuit/6290233901449216&quot;&gt;Relaxation Oscillator - EveryCircuit&lt;/a&gt;&lt;br /&gt; &amp;lt;iframe width=&quot;560&quot; height=&quot;360&quot; src=&quot;http://everycircuit.com/embed/6290233901449216&quot; frameborder=&quot;0&quot;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Note that in this example, R1-R3 are 510k, C1 is 8.2nF, R4 is 330k, and R5 is the combination of 50k and 30k – simulation is a bit wonky when it comes to making this converge.&lt;/p&gt;
+
+&lt;h3 id=&quot;testing&quot;&gt;Testing&lt;/h3&gt;
+
+&lt;p&gt;Wire up the comparator/op-amp, and take a look on your scope.  The pulse width seen at the output should have a variable duty cycle. This is a direct result of the time constant for charging C1 being smaller than the time constant for C1 to discharge (due to the diode allowing for a parallel resistance only when C1 is charging).&lt;/p&gt;
+
+&lt;h3 id=&quot;uses&quot;&gt;Uses&lt;/h3&gt;
+
+&lt;p&gt;Timing circuits, periodic enable lines (or wakeups), triggers for sampling, etc.  The shorter on-time can allow for lower quiescent current when attempting to enable a power-hungry device that doesn’t need to be on for the full 50% duty cycle.&lt;/p&gt;
+
+&lt;h3 id=&quot;additional-notes&quot;&gt;Additional Notes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The quiescent current of this circuit can get fairly low; on the order of microamps, depending on component selection.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If repeatable thresholds/oscillation frequencies are not a concern, this can be made pretty cheaply with a Schmitt Trigger instead of comparator/op-amp.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Building for the Atmel "SAMD20 Xplained Pro" in Ubuntu 14.04</title>
+   <link href="http://localhost:4000/2014/09/18/Atmel-SAMD20-EclipseCDT/"/>
+   <updated>2014-09-18T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2014/09/18/Atmel-SAMD20-EclipseCDT</id>
+   <content type="html">&lt;p&gt;This is a brief outline of the steps taken to get sample code from the Atmel ASF for the “SAMD20 Xplained Pro” built and flashed to the board from Ubuntu 14.04.  Much of this guide is built around insights from &lt;a href=&quot;https://plus.google.com/+AndreyYurovsky/posts/5JTehC7ngTq&quot;&gt;AndreyYurovsky&lt;/a&gt; and &lt;a href=&quot;http://blog.matwey.name/2013/12/atmel-atsamd20-xpro.html&quot;&gt;V. Kornilov Matwey&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;prerequisite-hardware&quot;&gt;Prerequisite Hardware&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.atmel.com/Images/Atmel-42147-SAM-D20-Getting-Started-with-SAMD20_Application-Note_AT03293.pdf&quot;&gt;“Atmel SAM D20 Xplained Pro Evaluation Kit (ATSAMD20-XPRO)”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.atmel.com/Images/Atmel-42129-SAM-D20_Datasheet.pdf&quot;&gt;SAMD20 Datasheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;software-installation&quot;&gt;Software Installation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.eclipse.org/cdt/&quot;&gt;Eclipse CDT&lt;/a&gt; this is an Eclipse IDE tailored to C/C++ development.  This guide was written for Eclipse Kepler, install this first.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://launchpad.net/gcc-arm-embedded&quot;&gt;GNU Tools for Embedded Processors&lt;/a&gt; this is a toolchain that has worked on Cortex M0/M0+ processors.  This guide is tested using version 2014-q2.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Atmel makes the &lt;a href=&quot;http://www.atmel.com/tools/AVRSOFTWAREFRAMEWORK.aspx&quot;&gt;“Atmel Software Framework”&lt;/a&gt;, available which provides plenty of actual code to begin working on the SAMD20 board.  Download this file; its large (200MB).  This guide was written for version 3.19.0 (“xdk-asf-3.19.0”).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://sourceforge.net/p/openocd/tickets/milestone/0.9.0/&quot;&gt;OpenOCD 0.9.0&lt;/a&gt; is used to actually connect to the board.  To install this, follow the instructions at https://plus.google.com/+AndreyYurovsky/posts/5JTehC7ngTq, transcribed here for convenience:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Execute the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libudev-dev
+git clone git://github.com/signal11/hidapi.git
+cd hidapi
+./bootstrap
+./configure
+make
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, make sure that your sources.list file contains ‘deb-src’ entries.  If it doesn’t, copy the existing ‘deb’ entries for Ubuntu repositories, and create an identical line for each of them, with ‘deb’ replaced by ‘deb-src’.  For example, here is my sources.list file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;deb http://mirror.math.ucdavis.edu/ubuntu/ trusty main universe restricted multiverse
+deb-src http://mirror.math.ucdavis.edu/ubuntu/ trusty main universe restricted multiverse
+deb http://mirror.math.ucdavis.edu/ubuntu/ trusty-updates main universe restricted multiverse
+deb-src http://mirror.math.ucdavis.edu/ubuntu/ trusty-updates main universe restricted multiverse
+deb http://security.ubuntu.com/ubuntu/ trusty-security main universe restricted multiverse
+deb-src http://security.ubuntu.com/ubuntu/ trusty-security main universe restricted multiverse
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, obtain the OpenOCD source code, and build it:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git://git.code.sf.net/p/openocd/code openocd
+cd openocd
+sudo apt-get build-dep openocd
+./bootstrap
+./configure
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The output at this point (after ./configure) should look like the following image.  Specifically, note that CMSIS-DAP support is present:
+&lt;img src=&quot;/assets/images/OpenOCD_Config_CMSIS.png&quot; alt=&quot;OpenOCD_CMSIS-DAP&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then run:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;At this point, you can try to launch OpenOCD to ensure that the install completed succesfully.  If an error along the lines of “error while loading shared libraries: libhidapi-hidraw.so.0” occurs, just run the following and retry:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libhidapi-hidraw0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, copy the udev rules for OpenOCD to the appropriate location, so that the SAMD20 Xplained Pro board is properly identified when plugged into USB:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo cp contrib/99-openocd.rules /etc/udev/rules.d/99-openocd.rules
+sudo udevadm control --reload-rules
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, if you plug in “SAMD20 Xplained Pro” via USB, and run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;openocd -f /./usr/local/share/openocd/scripts/board/atmel_samd20_xplained_pro.cfg 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The following (or similar) output should result:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Open On-Chip Debugger 0.9.0-dev-00148-g3a4ec66 (2014-09-18-14:32)
+Licensed under GNU GPL v2
+For bug reports, read
+    http://openocd.sourceforge.net/doc/doxygen/bugs.html
+Info : only one transport option; autoselect 'cmsis-dap'
+adapter speed: 500 kHz
+adapter_nsrst_delay: 100
+cortex_m reset_config sysresetreq
+Info : CMSIS-DAP: SWD  Supported
+Info : CMSIS-DAP: Interface Initialised (SWD)
+Info : CMSIS-DAP: FW Version = 01.1A.00FB
+Info : SWCLK/TCK = 1 SWDIO/TMS = 1 TDI = 1 TDO = 1 nTRST = 0 nRESET = 1
+Info : DAP_SWJ Sequence (reset: 50+ '1' followed by 0)
+Info : CMSIS-DAP: Interface ready
+Info : clock speed 500 kHz
+Info : IDCODE 0x0bc11477
+Info : at91samd20j18.cpu: hardware has 4 breakpoints, 2 watchpoints    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This indicates that OpenOCD is successfully connected to the board; more specifically, to the debugger chip located on the backside of the board (note the microcontroller closer to the USB port).  The “Interface Initialised (SWD)” indicates that the debugger is connected to the MCU.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Note: it may be possible to use this onboard debugger to connect to other SAMD20 MCUs external to the development board by connecting to the external header pins for SWD.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At this point, if you receive an error indicating “unable to open CMSIS-DAP device”, try a different USB port (or try unplugging other USB devices).Also, confirm that ‘Atmel Corp.’ appears in lsusb when the board is plugged in.&lt;/p&gt;
+
+&lt;h3 id=&quot;importing-asf-example-into-eclipse&quot;&gt;Importing ASF Example into Eclipse&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Launch Eclipse CDT, and navigate to “File-&amp;gt;Import”.  Select “Existing Projects into Workspace” from “General”.&lt;/li&gt;
+  &lt;li&gt;From here, navigate to the directory where you downloaded/unzipped the ASF; for me, its called “xdk-asf-3.19.0”&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Navigate to the LED Toggle example project for SAMD20 Xplained, which is found at:
+  xdf-asf-3.19.0/sam0/applications/led_toggle/samd20_xplained_pro/gcc
+&lt;img src=&quot;/assets/images/Import_SAMD20_Example.png&quot; alt=&quot;Import SAMD20 Example&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Click “Copy Projects into Workspace”, and click Finish.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At this point, the project should be in your workspace, and a directory structure something like the following image, without the binaries is likely what shows up in the project tree:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/SAMD20_Project_Tree.png&quot; alt=&quot;Project Tree&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that “config.mk” and “Makefile” are both here, these are important.&lt;/p&gt;
+
+&lt;p&gt;If you try to build this, you will likely encounter errors – the pathing for the Makefile doesn’t expect the example to be located in your workspace, so a few files have to change to accommodate this.&lt;/p&gt;
+
+&lt;p&gt;Open the Makefile (which is now in your workspace, in the imported project), and notice the following line:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MAKEFILE_PATH = ../../../../../sam0/utils/make/Makefile.sam.in
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We will need to change this to point to where the “xdk-asf-3.19.0” directory is located.  An easy solution (probably not best practices for project structure, but it will work) is to copy the xdk-asf-3.19.0 directory into the project directory, and make the following change in the Makefile:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#in the makefile, comment this out
+###MAKEFILE_PATH = ../../../../../sam0/utils/make/Makefile.sam.in
+#replace with the following line
+MAKEFILE_PATH = xdk-asf-3.19.0/sam0/utils/make/Makefile.sam.in
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next, open “config.mk” in the project directory, and find the following section:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Path to top level ASF directory relative to this project directory.
+PRJ_PATH = ../../../../..
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Change this section to the correct path, as here:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#Path to top level ASF directory relative to this project directory.
+#Note that since we moved the ASF directory into the project directory, 
+#just type in the name of the ASF directory.
+PRJ_PATH = xdk-asf-3.19.0/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next, right click on the project, and go to properties.  From the C/C++ Build section, under “Builder Settings”,
+uncheck “Use Default Build Command”, and type “make -f Makefile” instead, as in the following image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/CDT_Builder_Makefile.png&quot; alt=&quot;CDT Builder Makefile Dialog&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, apply the change, refresh the project, and attempt to build.  With any luck, you’ll end up with a successful build, producing .elf and .hex files that can then be used to program the board.&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-program-to-samd20-xplained-pro&quot;&gt;Installing Program to SAMD20 Xplained Pro&lt;/h3&gt;
+
+&lt;p&gt;We’ll use gdb for this step, so run the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install gdb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Open a terminal, get OpenOCD up and running as in the previous step, and connect to the board.  Ensure that the below line appears:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;info : at91samd20j18.cpu: hardware has 4 breakpoints, 2 watchpoints 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next, open another terminal, and navigate to the Eclipse workspace where your project resides.  Navigate to where the generated files are (look for the .bin and .elf files) and type the following in the terminal (from Andrey Yurovsky’s G+ post):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arm-none-eabi-gdb -ex &quot;target remote localhost:3333&quot; -ex &quot;mon reset halt&quot; low_power_flash.elf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This will cause some additional lines of output to appear in your OpenOCD window; this is expected.  See the below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/OpenOCD_AfterGDB.png&quot; alt=&quot;OpenOCD After GDB&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, in gdb, type the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;load
+mon reset init
+c
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, pressing the SW0 button (not the reset button) on the SAMD20 Xplained Pro dev board will light LED0.&lt;/p&gt;
+
+&lt;h3 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h3&gt;
+
+&lt;p&gt;To experiment, look at the “config.mk” file, and see where the source files are being pulled from – to build your own files, just modify these entires in config.mk, and have at it.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Importing Atollic C Projects to Eclipse</title>
+   <link href="http://localhost:4000/2014/09/09/atollic-to-eclipse/"/>
+   <updated>2014-09-09T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2014/09/09/atollic-to-eclipse</id>
+   <content type="html">&lt;h3 id=&quot;eclipse-cdt-and-cortex-m0&quot;&gt;Eclipse CDT and Cortex M0&lt;/h3&gt;
+
+&lt;p&gt;1) Get &lt;a href=&quot;http://www.eclipse.org/cdt/&quot;&gt;Eclipse CDT&lt;/a&gt;; this is an Eclipse IDE tailored to C/C++ development.  AFter installing Eclipse CDT, go to “Help”, and “Install New Software”.  Add http://gnuarmeclipse.sourceforge.net/updates to the “Work with” path, and select the available update.  Install this, and restart Eclipse.  &lt;strong&gt;Tested on Kepler&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;2) Ignore everything you read about CodeLite/CodeSourcery.  You want a cross-ARM toolchain that supports newlib-nano, for the size-optimized nano libraries.  Specifically, you want “GNU Tools for Embedded Processors (gcc-arm-embedded); download the latest precompiled toolchain (or source, if you are feeling masochistic today) from &lt;a href=&quot;https://launchpad.net/gcc-arm-embedded&quot;&gt;LaunchPad&lt;/a&gt;.  It’s maintained by ARM employees so hopefully it isn’t broken.  I’ve tested a working binary created on release &lt;a href=&quot;https://launchpad.net/gcc-arm-embedded/+milestone/4.8-2014-q2-update&quot;&gt;2014-q2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://avr-eclipse.sourceforge.net/user%20manual/concepts/toolchain.html&quot;&gt;Embedded Toolchain Diagram&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;3) Get a copy of whatever project you’ve successfully developed in Atollic, that you wish to port to this toolchain.&lt;/p&gt;
+
+&lt;p&gt;4) Launch Eclipse CDT, and go to “File-&amp;gt;Import” to import this project into the workspace.&lt;/p&gt;
+
+&lt;p&gt;5) Right click on the project name, and go to “Properties”
+- Click on “C/C++ Build”, and note the “Configuration” at the top of the dialog, this is the name of this configuration to which these settings are saved.  It is likely “Default [Active]”
+- Under “C/C++ Build” on the “Builder Settings” tab, set the Builder Type to “Internal Builder”&lt;/p&gt;
+
+&lt;p&gt;6) Under the “C/C++ Build” category, click on “Settings”, then “Toolchains”.  Ensure that the name of the toolchain contains a mention of “arm-none-eabi-gcc”&lt;/p&gt;
+
+&lt;p&gt;7) Click the “Use Global Toolchain Path”, and navigate to the /bin folder of the toolchain code downloaded and extracted in  step 2.  For example, “/home/josh/Development/gcc-arm-none-eabi-4_8-2014q2/bin”.&lt;/p&gt;
+
+&lt;p&gt;8) Under “Settings” -&amp;gt; “Tool Settings”, set the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Target Processor&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ARM family to “cortex-m0”&lt;/li&gt;
+  &lt;li&gt;Instruction set to “Thumb”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimization&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Optimize level “-Os” (optimize size)&lt;/li&gt;
+  &lt;li&gt;Enable “Function Sections” (-ffunction-sections)&lt;/li&gt;
+  &lt;li&gt;Enable “Data Sections” (-fdata-sections)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Warnings&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set “Enable all common warnings (-Wall)”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Debugging&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set Debug Level to “None”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cross ARM GNU Assembler&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Under “Preprocessor”, enable “Use Preprocessor” and “Do not search system directories (-nostdinc)”&lt;/li&gt;
+  &lt;li&gt;Ensure that nothing is listed under the “Includes” path, “Warnings” flags, or “Miscellaneous” flags here&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cross ARM C Compiler&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Under “Preprocessor”, add any symbols that are necessary for your project from Atollic&lt;/li&gt;
+  &lt;li&gt;Add library paths to the processor-specific header files for the processor which you are building.  In the case of the Cortex-MO, this is likely three folders, with names like “/CMSIS/Device/ST/STM32F0xx/Include”, “CMSIS/Include”, and “STM32F0xx_StdPeriph_Driver/inc”&lt;/li&gt;
+  &lt;li&gt;Add library paths to your own code header files as well&lt;/li&gt;
+  &lt;li&gt;Under “Optimization”, set the toolchain language to GNU ISO C90&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cross ARM C Linker&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Under “General”, enable “Remove unused sections (-Xlinker -gc-sections)”&lt;/li&gt;
+  &lt;li&gt;Under “General”, add the script file (which will be executed with “-T”) for your processor.  For the STM32, use “stm32_flash.ld”&lt;/li&gt;
+  &lt;li&gt;Under “Other Linker Flags”, add the following:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-Wl,--start-group -lc -lm -Wl,--end-group -static -Wl,-cref,-u,Reset_Handler
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Post Build Commands&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The above commands will allow Eclipse to generate an .elf file.  To generate a bin or hex, use whatever tool you find most preferable.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Disabling Debug Symbols&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The BlinkyLED project is probably too large (flash overflow) when targetted against an F4.  Follow the steps here to disable debug symbols:
+http://wiki.wxwidgets.org/Eclipse,&lt;em&gt;CDT&lt;/em&gt;%26&lt;em&gt;MingW&lt;/em&gt;%26_MSYS_Setup_Guide#Changing_the_Build_Configuration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;
+&lt;a href=&quot;http://www.tutorialspoint.com/cprogramming/c_operators.htm&quot;&gt;Operators and C Syntax&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  

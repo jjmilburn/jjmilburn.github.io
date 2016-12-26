@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+
+  <title>
+    Sharing a Prolific USB->UART Converter with VirtualBox &middot; 
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.png">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+</head>
+
+
+  <body>
+
+    <header class="masthead">
+      <div class="masthead-inner">
+        <h1></h1>
+        <p class="lead">Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.</p>
+
+        <div class="colophon">
+          <ul class="colophon-links">
+            <li>
+              <a href="">Nothing.</a>
+            </li>
+            <li>
+              <a href="https://github.com/jjmilburn">Me Github</a>
+            </li>
+            <li>Currently v0.9.0</li>
+          </ul>
+          <p>&copy; 2014. Josh Milburn All rights reserved.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content container">
+      <div class="post">
+  <h1>Sharing a Prolific USB->UART Converter with VirtualBox</h1>
+  <span class="post-date">04 Apr 2016</span>
+  <p>While creating a UART protocol for use in a new product, it
+became useful to connect a serial adapter from my host PC to the Vagrant
+environment which held the protocol code and its dependencies.  This approach
+should work regardless of the UART converter model/brand (Prolific, FTDI, etc)
+assuming that plugging the device in creates a <code class="highlighter-rouge">/dev/ttyUSB[0-9]</code> entry.  This
+guide is written for a *nix host platform (Ubuntu).</p>
+
+<hr />
+
+<h3 id="first-things-first">First Things First</h3>
+
+<p>The adapter which was used to test this approach is similar to the
+<a href="https://www.adafruit.com/products/954">USB to TTL Serial Cable</a> available on Adafruit; but any similar adapter should work.</p>
+
+<h3 id="step-by-step">Step-By-Step</h3>
+
+<ol>
+  <li>
+    <p>Plug in the USB-&gt;Serial adapter, and ensure that it shows up under <code class="highlighter-rouge">lsusb</code>, as well as creating a device entry similar to <code class="highlighter-rouge">/dev/ttyUSB*</code> .</p>
+  </li>
+  <li>
+    <p>Once the adapter is plugged in, execute <code class="highlighter-rouge">chmod 666 /dev/ttyUSB0</code> (substituting ttyUSB0 for whatever USB* port the adapter enumerated to) on the host machine.  Determine the adapter by observing what new entry is added to the output 
+of <code class="highlighter-rouge">ls /dev/ttyUSB*</code> when the adapter is plugged into the host machine.</p>
+  </li>
+</ol>
+
+<p>Alternately, ensure that the user running the VirtualBox on the host machine
+is in the <code class="highlighter-rouge">dialout</code> group (<code class="highlighter-rouge">sudo adduser $USER dialout</code>).  This requires a
+logut/login cycle to take effect.</p>
+
+<ol>
+  <li>In the VM VirtualBox Manager GUI, go to “Settings” for the machine which
+will receive access to the serial port, and navigate to the “Port 1” tab under
+“Serial Ports”. Set “Port Number” to “COM4” (corresponding to a guest VM serial
+port of <code class="highlighter-rouge">/dev/ttyS3</code>), leave IRQ and I/O port as their defaults, select
+“Host Device” as the Port Mode, and type the path to the serial port device
+on the <em>Host</em> machine under “Port/File Path”.  In this example, this is
+<code class="highlighter-rouge">/dev/ttyUSB0</code>.</li>
+</ol>
+
+<p><img src="/assets/images/Vbox_Serial_Port.png" alt="VirtualBox Serial Port Settings" /></p>
+
+<ol>
+  <li>
+    <p>On the guest <code class="highlighter-rouge">sudo adduser $USER dialout</code> will add the guest user to a group
+which has access to the serial port interfaces (e.g. /dev/ttyS*).  Execute this command, then log out and back into the guest machine.</p>
+  </li>
+  <li>
+    <p>Ensure the TX/RX lines are connected together on the serial adapter for
+the next step (a loopback test from the guest VM).</p>
+  </li>
+  <li>
+    <p>Log into two separate terminal sessions on the guest VM, in the first
+session, type <code class="highlighter-rouge">cat /dev/ttyS3</code>.  In the second terminal session, type
+<code class="highlighter-rouge">echo "test" &gt; /dev/ttyS3</code>.  If the serial device from the host is being
+successfully passed through to the guest, “test” should appear in the window
+where <code class="highlighter-rouge">cat</code> is running.</p>
+  </li>
+</ol>
+
+<p>At this point, the guest VM has access to read and write to a USB serial adapter
+connected to the host machine.  Note that this approach does not require the
+guest VM to have any direct USB peripheral access to the host.</p>
+
+<h2 id="asides">Asides</h2>
+
+<ul>
+  <li>
+    <p><a href="https://pypi.python.org/pypi/pyserial"><code class="highlighter-rouge">PySerial</code></a> is an extremely useful library for abstracting away most of the
+complexities involved with programmatically accessing a serial port for UART
+communications.</p>
+  </li>
+  <li>
+    <p>If also occasionally using the serial port outside of the virtual machine,
+note that if the virtual machine is currently accessing the serial port (e.g.
+the host is passing the serial port directly through to the VM) there will be
+problems attempting to use it on the host at the same time.</p>
+  </li>
+  <li>
+    <p>This approach might not be suitable for near-realtime response requirements
+on the serial lines.</p>
+  </li>
+</ul>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2016/12/03/Cell-Module-US-Certification/">
+            The Basics - Certifying a Cellular Product in the US
+            <small>03 Dec 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/06/20/Cellular-Module-Global-Approvals/">
+            Beyond FCC - Exploring International RF Regulations
+            <small>20 Jun 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/10/13/Relaxation-Oscillator-DutyCycle/">
+            Relaxation Oscillator with Variable Duty Cycle
+            <small>13 Oct 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

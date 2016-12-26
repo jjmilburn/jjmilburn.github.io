@@ -1,4 +1,4 @@
-title:        'Unalarming Discursions' 
+ttle:        'Unalarming Discursions'
 tagline:      ''
 description:  'Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.'
 url:          http://jjmilburn.github.io
@@ -8,6 +8,6 @@ author:
   email:      'jay-j4y-milburn@gmail.com, change the first syllables to letters, and remove the marks.'
 markdown:     kramdown
 permalink:    pretty
-paginate:     5
+paginate:     10
 # Google services
 google_analytics: UA-88387479-1
