@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+
+  <title>
+    The Basics - Certifying a Cellular Product in the US &middot; 
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.png">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+</head>
+
+
+  <body>
+
+    <header class="masthead">
+      <div class="masthead-inner">
+        <h1></h1>
+        <p class="lead">Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.</p>
+
+        <div class="colophon">
+          <ul class="colophon-links">
+            <li>
+              <a href="">Nothing.</a>
+            </li>
+            <li>
+              <a href="https://github.com/jjmilburn">Me Github</a>
+            </li>
+            <li>Currently v0.9.0</li>
+          </ul>
+          <p>&copy; 2014. Josh Milburn All rights reserved.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content container">
+      <div class="post">
+  <h1>The Basics - Certifying a Cellular Product in the US</h1>
+  <span class="post-date">18 Mar 2017</span>
+  <p>Even if your product integrates a cellular module with an FCC certification, it
+does not mean that the integrated product is fine to sell on the open market.
+This post pulls together estimates from various sources to gain a rough estimate
+of total cost for RF-related certification on a product using a ‘certified’
+cellular module.</p>
+
+<hr />
+
+<p>First, lets be clear – I’m not a legal expert on cellular certifications, and
+the information in this post is meant to be informative, not a complete guide
+to what you need to cerify a GSM product in the US.  With that in mind, lets
+proceed to explore this topic.</p>
+
+<p>If you intend to sell a product with radio communication in the EU, <a href="http://www.tuv.com/en/usa/services_usa/product_testing/telecom_it/rtte_directive/rtte_directive.html">R&amp;TTE</a> compliance will likely be required.  GSM/M2M modules can be <a href="http://www.tuv-sud.co.uk/uploads/images/1365171464129234960088/uk-mkg-guide-to-wireless-m2m-module-integration-en-uk.pdf">individually certified as compliant with R&amp;TTE</a>, which reduces the testing burden.  A number of third party test facilities (TUV, 7-Layers, IB Lenhardt, etc.) exist which can help take a product through the R&amp;TTE certification process.</p>
+
+<h3 id="us-specific---ptcrb">US Specific - PTCRB</h3>
+
+<p>This was mentioned briefly in a previous post, but you can’t ignore the PTCRB
+if planning to sell in the USA.  As mentioned previously, the cost for this
+certification runs between <a href="http://m2msupport.net/m2msupport/ptcrb-process-costs-timeline-and-labs/">$16k-20k for a data-only device</a>.  Other resources suggest a total budget of
+<a href="http://www.aldacom.com/gsm-info/gsm-certification-info.html">~$80k</a>, including
+all pre-compliance lab testing, field testing, PTCRB, and FCC testing.</p>
+
+<h3 id="tests-before-the-tests-precertification">Tests Before the Tests (Precertification)</h3>
+
+<p>Before going forward with the formal testing, however, it would be prudent to
+seek ‘pre-approval’ testing.  This sort of testing typically examines two key
+test parameters:</p>
+
+<ul>
+  <li>TIS (Total Isotropic Sensitivity) – measuring reception efficiency</li>
+  <li>TRP (Total Radiated Power) – measuring transmission efficiency</li>
+</ul>
+
+<p>This assumes the device is not ‘near’ a human body, e.g. not a cellphone
+or a wearable.  For devices in those categories, you’ll also need to consider
+<a href="http://www.intertek.com/wireless-mobile/devices/sar-testing/">SAR testing</a>.</p>
+
+<p>There are <a href="http://www.taoglas.com/wp-content/uploads/2015/07/Taoglas-Guidelines-for-achieving-highest-RF-performance-and-passing-select-regulatory-approvals-for-cellular-devices-with-internal-antennas-2010042.pdf">guideline values</a>
+for these measurements given by Taoglas.  Your cellular module supplier and/or
+antenna vendor may be able to perform some form of TIS/TRP testing on your
+assembled product, and if not, should be able to refer you to appropriate
+“TIS/TRP Precertification Test” facilities.  These tests will usually involve the
+testing house inserting a test SIM into your device, and executing a number
+of tests in an anechoic chamber – during which your device should remain
+powered on and your firmware should not be attempting to control the GSM
+module.  Confirm with the test house, but generally, the firmware elements
+controlling the GSM module should be modified to only power on the GSM module
+and otherwise leave it alone (e.g. don’t try to transmit data).</p>
+
+<p>TIS/TRP testing can acts as a gatekeeper to costlier certifications – if the
+device is unable to pass a basic TIS/TRP precertification test, improvements
+should be made before moving to the more formal tests (e.g. PTCRB).  While
+analysis equipment (a TEM cell, spectrum analyzer, etc) is typically necessary
+to pinpoint the source of noise on a PCB, some ‘common’ RF performance
+improvement moves include:</p>
+
+<ul>
+  <li><a href="http://www.cvel.clemson.edu/pdf/EMCS00-833.pdf">Better via stitching to reduce EMI</a></li>
+  <li>Wider/lower inductance power traces to the GSM module</li>
+  <li>Switching to shielded inductors where possible</li>
+  <li>Keeping the antenna distant from metal (the PCB, components, and housing elements)</li>
+  <li>Shorter sensitive signal lines (shorten SIM card interface traces)</li>
+  <li>Keeping the GSM module (and any antenna trace) distant from SMPS elements</li>
+  <li>Keeping the controlling MCU and GSM module on opposite sides of the PCB</li>
+  <li>Any RF traces (antenna to module) are as short as realistically possible</li>
+  <li>Determine and follow exact RF trace width/spacing based on PCB thickness</li>
+</ul>
+
+<h3 id="fcc-approved-module">FCC Approved Module</h3>
+
+<p>In the US, using an FCC certified wireless module is an absolute requirement.
+Fortunately, most modules you’d be considering from major vendors (Simcom,
+Telit, Quectel, ZTE, Huawei, Neoway, etc) will already have FCC certification.</p>
+
+<p>You can check for the FCC record on a given module by searching the <a href="https://fccid.io/">fccid.io</a>
+database.  For instance, the <a href="https://fccid.io/UDV-SIM800C">Simcom SIM800C</a> is
+an example of a widely available FCC certified cellular module.</p>
+
+<h3 id="antenna-selection">Antenna Selection</h3>
+
+<p>Ideally, you have plenty of space, and can use an off-the-shelf antenna
+and follow the guidelines provided by the manufacturer.  If this is not
+the case, I can’t be of much help – consult an antenna expert.  But if you’re
+designing an IoT product and need to get it to market, generally de-risk by not
+trying to make it as small as possible if you can avoid it – leave around 20mm
+air-gap between the antenna and any metal (PCB, screws, buttons, capacitors
+or inductors, etc) and you’ll save yourself significant headaches resulting
+from interactions in the <a href="http://www.antenna-theory.com/basics/fieldRegions.php">near-field region</a>.
+Also, get as efficient an antenna as you can reasonably find for the bands
+of interest to you.</p>
+
+<p>As an example, this Pulse Electronics <a href="http://productfinder.pulseeng.com/files/datasheets/W3538.pdf">W3538</a>
+has three different versions with varying efficiencies.  To get maximum
+efficiency at the 1710-1990 MHz frequency range, you would select the
+W3538B0200 model (it lists 80% efficiency, compared to the 70% efficiency
+provided by the other two submodels).  Every step along the chain, there is
+signal degradation: the connection point to the PCB, attentuation through
+the product enclosure, the RF trace on the PCB, so sourcing an efficient
+antenna is one way to reduce losses in the signal chain.</p>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<ul>
+  <li><a href="http://library.ul.com/wp-content/uploads/sites/40/2015/02/UL_WP_Draft_FCC-Approval-of-Host-Devices-with-Integrated-Wireless-Modules_v6.pdf">“FCC Approval of Host Devices with Integrated Wireless Modules</a></li>
+  <li><a href="https://www.digi.com/pdf/iot_design_certs_cellularapps.pdf">“Compliance Design &amp; Certification for IOT Cellular Application” (Digi)</a></li>
+  <li><a href="http://www.taoglas.com/wp-content/uploads/2015/07/Certification-Requirements-for-a-GSM-Device-in-North-AmericaAPN-14-8-003.A.pdf">“Certification Requirements for a GSM Device in North America” (Taoglas)</a></li>
+  <li><a href="http://www.antenna-theory.com/definitions/trp.php">antenna-theory.com TRP Page</a></li>
+  <li><a href="http://www.antenna-theory.com/definitions/tis.php">antenna-theory.com TIS Page</a></li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="Other Posts">
+    
+      <li>
+        <h3>
+          <a href="/2017/01/02/embedded-gcc-beyond-wall/">
+            Embedded Gcc Beyond Wall
+            <small>02 Jan 2017</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2016/04/04/ttyUSB-to-vagrant-virtualbox/">
+            Sharing a Prolific USB->UART Converter with VirtualBox
+            <small>04 Apr 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/06/20/Cellular-Module-Global-Approvals/">
+            Beyond FCC - Exploring International RF Regulations
+            <small>20 Jun 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-88387479-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

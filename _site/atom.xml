@@ -4,7 +4,7 @@
  <title></title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2016-12-25T17:20:37-08:00</updated>
+ <updated>2017-04-24T19:19:49-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Josh Milburn</name>
@@ -14,31 +14,235 @@
  
  <entry>
    <title>The Basics - Certifying a Cellular Product in the US</title>
-   <link href="http://localhost:4000/2016/12/03/Cell-Module-US-Certification/"/>
-   <updated>2016-12-03T00:00:00-08:00</updated>
-   <id>http://localhost:4000/2016/12/03/Cell-Module-US-Certification</id>
-   <content type="html">&lt;p&gt;Even if your nifty new GSM module has an FCC certification, it doesn’t mean
-the integrated product is fine to sell on the open market.  This post pulls
-together estimates from various sources to gain a rough estimate of total cost
-for RF-related certification on a product using a pre-certified cellular
-module.&lt;/p&gt;
+   <link href="http://localhost:4000/2017/03/18/Cellular-Certification-in-USA/"/>
+   <updated>2017-03-18T00:00:00-07:00</updated>
+   <id>http://localhost:4000/2017/03/18/Cellular-Certification-in-USA</id>
+   <content type="html">&lt;p&gt;Even if your product integrates a cellular module with an FCC certification, it
+does not mean that the integrated product is fine to sell on the open market.
+This post pulls together estimates from various sources to gain a rough estimate
+of total cost for RF-related certification on a product using a ‘certified’
+cellular module.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;First, lets be clear – I’m not a legal expert on cellular certifications, and
 the information in this post is meant to be informative, not a complete guide
 to what you need to cerify a GSM product in the US.  With that in mind, lets
-proceed…&lt;/p&gt;
-
-&lt;h3 id=&quot;untitled-header-section&quot;&gt;Untitled Header Section&lt;/h3&gt;
+proceed to explore this topic.&lt;/p&gt;
 
 &lt;p&gt;If you intend to sell a product with radio communication in the EU, &lt;a href=&quot;http://www.tuv.com/en/usa/services_usa/product_testing/telecom_it/rtte_directive/rtte_directive.html&quot;&gt;R&amp;amp;TTE&lt;/a&gt; compliance will likely be required.  GSM/M2M modules can be &lt;a href=&quot;http://www.tuv-sud.co.uk/uploads/images/1365171464129234960088/uk-mkg-guide-to-wireless-m2m-module-integration-en-uk.pdf&quot;&gt;individually certified as compliant with R&amp;amp;TTE&lt;/a&gt;, which reduces the testing burden.  A number of third party test facilities (TUV, 7-Layers, IB Lenhardt, etc.) exist which can help take a product through the R&amp;amp;TTE certification process.&lt;/p&gt;
 
-&lt;h3 id=&quot;ptcrb&quot;&gt;PTCRB&lt;/h3&gt;
+&lt;h3 id=&quot;us-specific---ptcrb&quot;&gt;US Specific - PTCRB&lt;/h3&gt;
 
-&lt;p&gt;This was mentioned briefly in a previous post, but you can’t ignore this agency
+&lt;p&gt;This was mentioned briefly in a previous post, but you can’t ignore the PTCRB
 if planning to sell in the USA.  As mentioned previously, the cost for this
-certification runs between &lt;a href=&quot;http://m2msupport.net/m2msupport/ptcrb-process-costs-timeline-and-labs/&quot;&gt;$16k-20k for a data-only device&lt;/a&gt;.&lt;/p&gt;
+certification runs between &lt;a href=&quot;http://m2msupport.net/m2msupport/ptcrb-process-costs-timeline-and-labs/&quot;&gt;$16k-20k for a data-only device&lt;/a&gt;.  Other resources suggest a total budget of
+&lt;a href=&quot;http://www.aldacom.com/gsm-info/gsm-certification-info.html&quot;&gt;~$80k&lt;/a&gt;, including
+all pre-compliance lab testing, field testing, PTCRB, and FCC testing.&lt;/p&gt;
+
+&lt;h3 id=&quot;tests-before-the-tests-precertification&quot;&gt;Tests Before the Tests (Precertification)&lt;/h3&gt;
+
+&lt;p&gt;Before going forward with the formal testing, however, it would be prudent to
+seek ‘pre-approval’ testing.  This sort of testing typically examines two key
+test parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TIS (Total Isotropic Sensitivity) – measuring reception efficiency&lt;/li&gt;
+  &lt;li&gt;TRP (Total Radiated Power) – measuring transmission efficiency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This assumes the device is not ‘near’ a human body, e.g. not a cellphone
+or a wearable.  For devices in those categories, you’ll also need to consider
+&lt;a href=&quot;http://www.intertek.com/wireless-mobile/devices/sar-testing/&quot;&gt;SAR testing&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are &lt;a href=&quot;http://www.taoglas.com/wp-content/uploads/2015/07/Taoglas-Guidelines-for-achieving-highest-RF-performance-and-passing-select-regulatory-approvals-for-cellular-devices-with-internal-antennas-2010042.pdf&quot;&gt;guideline values&lt;/a&gt;
+for these measurements given by Taoglas.  Your cellular module supplier and/or
+antenna vendor may be able to perform some form of TIS/TRP testing on your
+assembled product, and if not, should be able to refer you to appropriate
+“TIS/TRP Precertification Test” facilities.  These tests will usually involve the
+testing house inserting a test SIM into your device, and executing a number
+of tests in an anechoic chamber – during which your device should remain
+powered on and your firmware should not be attempting to control the GSM
+module.  Confirm with the test house, but generally, the firmware elements
+controlling the GSM module should be modified to only power on the GSM module
+and otherwise leave it alone (e.g. don’t try to transmit data).&lt;/p&gt;
+
+&lt;p&gt;TIS/TRP testing can acts as a gatekeeper to costlier certifications – if the
+device is unable to pass a basic TIS/TRP precertification test, improvements
+should be made before moving to the more formal tests (e.g. PTCRB).  While
+analysis equipment (a TEM cell, spectrum analyzer, etc) is typically necessary
+to pinpoint the source of noise on a PCB, some ‘common’ RF performance
+improvement moves include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cvel.clemson.edu/pdf/EMCS00-833.pdf&quot;&gt;Better via stitching to reduce EMI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Wider/lower inductance power traces to the GSM module&lt;/li&gt;
+  &lt;li&gt;Switching to shielded inductors where possible&lt;/li&gt;
+  &lt;li&gt;Keeping the antenna distant from metal (the PCB, components, and housing elements)&lt;/li&gt;
+  &lt;li&gt;Shorter sensitive signal lines (shorten SIM card interface traces)&lt;/li&gt;
+  &lt;li&gt;Keeping the GSM module (and any antenna trace) distant from SMPS elements&lt;/li&gt;
+  &lt;li&gt;Keeping the controlling MCU and GSM module on opposite sides of the PCB&lt;/li&gt;
+  &lt;li&gt;Any RF traces (antenna to module) are as short as realistically possible&lt;/li&gt;
+  &lt;li&gt;Determine and follow exact RF trace width/spacing based on PCB thickness&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fcc-approved-module&quot;&gt;FCC Approved Module&lt;/h3&gt;
+
+&lt;p&gt;In the US, using an FCC certified wireless module is an absolute requirement.
+Fortunately, most modules you’d be considering from major vendors (Simcom,
+Telit, Quectel, ZTE, Huawei, Neoway, etc) will already have FCC certification.&lt;/p&gt;
+
+&lt;p&gt;You can check for the FCC record on a given module by searching the &lt;a href=&quot;https://fccid.io/&quot;&gt;fccid.io&lt;/a&gt;
+database.  For instance, the &lt;a href=&quot;https://fccid.io/UDV-SIM800C&quot;&gt;Simcom SIM800C&lt;/a&gt; is
+an example of a widely available FCC certified cellular module.&lt;/p&gt;
+
+&lt;h3 id=&quot;antenna-selection&quot;&gt;Antenna Selection&lt;/h3&gt;
+
+&lt;p&gt;Ideally, you have plenty of space, and can use an off-the-shelf antenna
+and follow the guidelines provided by the manufacturer.  If this is not
+the case, I can’t be of much help – consult an antenna expert.  But if you’re
+designing an IoT product and need to get it to market, generally de-risk by not
+trying to make it as small as possible if you can avoid it – leave around 20mm
+air-gap between the antenna and any metal (PCB, screws, buttons, capacitors
+or inductors, etc) and you’ll save yourself significant headaches resulting
+from interactions in the &lt;a href=&quot;http://www.antenna-theory.com/basics/fieldRegions.php&quot;&gt;near-field region&lt;/a&gt;.
+Also, get as efficient an antenna as you can reasonably find for the bands
+of interest to you.&lt;/p&gt;
+
+&lt;p&gt;As an example, this Pulse Electronics &lt;a href=&quot;http://productfinder.pulseeng.com/files/datasheets/W3538.pdf&quot;&gt;W3538&lt;/a&gt;
+has three different versions with varying efficiencies.  To get maximum
+efficiency at the 1710-1990 MHz frequency range, you would select the
+W3538B0200 model (it lists 80% efficiency, compared to the 70% efficiency
+provided by the other two submodels).  Every step along the chain, there is
+signal degradation: the connection point to the PCB, attentuation through
+the product enclosure, the RF trace on the PCB, so sourcing an efficient
+antenna is one way to reduce losses in the signal chain.&lt;/p&gt;
+
+&lt;h3 id=&quot;additional-resources&quot;&gt;Additional Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://library.ul.com/wp-content/uploads/sites/40/2015/02/UL_WP_Draft_FCC-Approval-of-Host-Devices-with-Integrated-Wireless-Modules_v6.pdf&quot;&gt;“FCC Approval of Host Devices with Integrated Wireless Modules&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.digi.com/pdf/iot_design_certs_cellularapps.pdf&quot;&gt;“Compliance Design &amp;amp; Certification for IOT Cellular Application” (Digi)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.taoglas.com/wp-content/uploads/2015/07/Certification-Requirements-for-a-GSM-Device-in-North-AmericaAPN-14-8-003.A.pdf&quot;&gt;“Certification Requirements for a GSM Device in North America” (Taoglas)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.antenna-theory.com/definitions/trp.php&quot;&gt;antenna-theory.com TRP Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.antenna-theory.com/definitions/tis.php&quot;&gt;antenna-theory.com TIS Page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Embedded Gcc Beyond Wall</title>
+   <link href="http://localhost:4000/2017/01/02/embedded-gcc-beyond-wall/"/>
+   <updated>2017-01-02T00:00:00-08:00</updated>
+   <id>http://localhost:4000/2017/01/02/embedded-gcc-beyond-wall</id>
+   <content type="html">&lt;In progress=&quot;&quot;&gt;
+
+---
+layout: post
+title: Embedded Code Quality -- Beyond `-Wall`
+---
+
+While `gcc` can be used to find a number of possible problems using the `-Wall`
+and `-Werror` flags, additional linting and analysis tools can be used to
+catch addiitonal issues that are not noticed by gcc.  This post discusses
+a few options, and shows the general approach used to set up 
+the general approach used to set up `splint` to lint files in an embedded C
+project using `gcc` as the compiler.
+
+-----
+
+### Rationale
+
+We have an embedded C project, consisting of a number of different modules, and
+use `gcc` and `check` to compile the project and run unit tests against each
+module.  This is a fine approach, and we even get some additional coverage
+during the `gcc` compile process by using additional flags.  The flags we
+pass to `gcc` specifically in this build-for-unit-test process 
+(including a custom one you can ignore, `-DANGAZA_USE_DEFAULT_ASSERT`), are:
+
+```
+CFLAGS=\                                                                        
+    -Isrc/ -O0 -g -Wall -Wextra -Wno-unused-parameter -Wundef -Wuninitialized\  
+        -Winit-self -Wpedantic -Werror -Winline -std=c11 -DANGAZA_USE_DEFAULT_ASSERT -coverage
+```
+
+`-Wall` is a very valuable flag for knocking out potential bugs -- if you're
+able to compile your code using the `-Wall` flag and see no warnings, its
+a strong positive indicator for code quality.  In my daily work, we go a step
+further-- the `-Werror` flag is used to turn these warnings into errors, and
+prevent this questionable code from being checked into master.
+
+However, we can do more.  `splint` is one such tool, and Barr Group has an
+excellent [article](http://www.barrgroup.com/Embedded-Systems/How-To/Lint-Static-Analysis-Tool) on where to use lint in a design process (after the code is 
+compilable), and I won't repeat that discussion here (go read it, though).
+Personally, I've found `splint` to be a bit heavy-handed with our codebase,
+and the amount of work required to support it outweighed the potential issues
+it found.  It's worth a try, though -- if you find its manageable, use it.
+
+relevant link: https://coelhorjc.wordpress.com/2015/02/19/how-to-do-static-code-analysis-in-cc-using-sparse-splint-cpplint-and-clang/comment-page-1/
+
+### OS and Install
+
+If using a 'standard' Unix based OS (e.g. Ubuntu), its possible that`splint`
+is available using the usual `apt-get install splint` approach.  If not, you
+can find the source and install instructions [on the splint website](http://www.splint.org/source.html).
+
+
+
+Rationale
+
+### Step-By-Step
+
+1. Plug in the USB-&amp;gt;Serial adapter, and ensure that it shows up under `lsusb`, as well as creating a device entry similar to `/dev/ttyUSB*` .
+
+2.  Once the adapter is plugged in, execute `chmod 666 /dev/ttyUSB0` (substituting ttyUSB0 for whatever USB* port the adapter enumerated to) on the host machine.  Determine the adapter by observing what new entry is added to the output 
+of `ls /dev/ttyUSB*` when the adapter is plugged into the host machine.
+
+Alternately, ensure that the user running the VirtualBox on the host machine
+is in the `dialout` group (`sudo adduser $USER dialout`).  This requires a
+logut/login cycle to take effect.
+
+3. In the VM VirtualBox Manager GUI, go to &quot;Settings&quot; for the machine which
+will receive access to the serial port, and navigate to the &quot;Port 1&quot; tab under
+&quot;Serial Ports&quot;. Set &quot;Port Number&quot; to &quot;COM4&quot; (corresponding to a guest VM serial
+port of `/dev/ttyS3`), leave IRQ and I/O port as their defaults, select
+&quot;Host Device&quot; as the Port Mode, and type the path to the serial port device
+on the *Host* machine under &quot;Port/File Path&quot;.  In this example, this is
+`/dev/ttyUSB0`.
+
+![VirtualBox Serial Port Settings](/assets/images/Vbox_Serial_Port.png)
+
+4. On the guest `sudo adduser $USER dialout` will add the guest user to a group
+which has access to the serial port interfaces (e.g. /dev/ttyS*).  Execute this command, then log out and back into the guest machine.
+
+5. Ensure the TX/RX lines are connected together on the serial adapter for
+the next step (a loopback test from the guest VM).
+
+6. Log into two separate terminal sessions on the guest VM, in the first
+session, type `cat /dev/ttyS3`.  In the second terminal session, type
+`echo &quot;test&quot; &amp;gt; /dev/ttyS3`.  If the serial device from the host is being
+successfully passed through to the guest, &quot;test&quot; should appear in the window
+where `cat` is running.
+
+At this point, the guest VM has access to read and write to a USB serial adapter
+connected to the host machine.  Note that this approach does not require the
+guest VM to have any direct USB peripheral access to the host.
+
+## Asides
+
+* [`PySerial`](https://pypi.python.org/pypi/pyserial) is an extremely useful library for abstracting away most of the
+complexities involved with programmatically accessing a serial port for UART
+communications.
+
+* If also occasionally using the serial port outside of the virtual machine,
+note that if the virtual machine is currently accessing the serial port (e.g.
+the host is passing the serial port directly through to the VM) there will be
+problems attempting to use it on the host at the same time.
+
+* This approach might not be suitable for near-realtime response requirements
+on the serial lines.
+
+&lt;/In&gt;
 </content>
  </entry>
  
