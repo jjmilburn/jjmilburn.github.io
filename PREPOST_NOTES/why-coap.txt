@@ -1,0 +1,3 @@
+* explain why we did this
+* Discuss other possible protocols (802.54g, thread, CC1300, etc)
+* UDP brief consideration

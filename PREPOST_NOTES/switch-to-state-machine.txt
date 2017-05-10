@@ -1,0 +1,4 @@
+* Abstract a basic example out from the GSM manager code
+* add in new concepts as variables
+* Show the spaghettification
+* And show how to get it back to normal land using real stuff

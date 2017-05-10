@@ -1,0 +1,38 @@
+*have to install avr-gcc, was not brought in with ceedling (blinky proj)
+
+1) install rvm-ruby to manage the ceedling package
+     * https://rvm.io/rvm/install
+     * \curl -sSL https://get.rvm.io | bash -s stable --ruby
+     * source /home/josh/.rvm/scripts/rvm
+     * gem install ceedling
+
+2) Create a 'ceedling-tests' directory in the project directory
+    * Open the 'project.yml' file, and add your existing file paths to the
+    'source' section
+    * Keep the 'support' section as-is
+    * Keep the 'test' section as-is
+
+3) 
+
+
+*** 
+Test All The Things!
+How can we write tests for our code which calls hardware-specific interfaces?
+Cmock - works well, easy button (‘ceedling’ integration)
+Super automatic!
+Also.. potentially brittle.  Default case is ‘if you call it in the
+Code and don’t mock it in the test code, it will fail!’
+FFF [Fake Function Framework] 
+Does not assume you have 
+
+* Architecturally, to build effective tests, the API to your modules must
+allow you to construct something meaningful to interact with -- without this,
+there is little ability to test.
+
+Things to do:
+* Ensure clang scan-build is still running over the build
+
+Resources:
+* Intro: http://www.throwtheswitch.org/ceedling/
+* https://dmitryfrank.com/articles/unit_testing_embedded_c_applications
+* http://www.electronvector.com/blog/add-unit-tests-to-your-current-project-with-ceedling

@@ -5,9 +5,317 @@
     <description>Engineering Field Notes. Made by &lt;a href=&quot;http://electronics.stackexchange.com/users/31199/jjmilburn&quot; target=&quot;_blank&quot;&gt;@jjmilburn&lt;/a&gt;.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 24 Apr 2017 19:19:49 -0700</pubDate>
-    <lastBuildDate>Mon, 24 Apr 2017 19:19:49 -0700</lastBuildDate>
+    <pubDate>Tue, 09 May 2017 18:16:23 -0700</pubDate>
+    <lastBuildDate>Tue, 09 May 2017 18:16:23 -0700</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Android Open Accessory Mode (AOA) Support in 2017</title>
+        <description>&lt;p&gt;While Bluetooth gets plenty of attention for providing sensor and accessory
+connectivity to Android devices, an older protocol introduced at Google I/O
+2011 continues to promise widely compatible, no-pairing data wired data
+transfer.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;During the course of evaluating connectivity options for an Android-connected
+accessory in a recent project, Android Open Accessory (AOA) came up as an
+option.  This is a little talked about protocol that has been around since API
+3.1, and provides ‘driverless’ support for communicating to an external USB
+device which must power the bus (like a host).&lt;/p&gt;
+
+&lt;p&gt;‘Widespread compatibility’ was an important metric for us, which ruled out
+USB OTG.  Using OTG/Host mode would reduce the accessory cost and complexity
+by removing the need for the accessory to have a battery (since the phone
+powers the accessory in OTG mode), but the spotty availability of native,
+works-out-of-the-box USB OTG support on low and mid-range handsets eliminated
+this as a possibility.&lt;/p&gt;
+
+&lt;p&gt;This left the choices of WiFi, BlueTooth, and AOA.  We decided to determine
+empirically how widely supported AOA was, and found the results quite
+promising.&lt;/p&gt;
+
+&lt;p&gt;To investigate further, we purchased the &lt;a href=&quot;http://www.ftdichip.com/Products/Modules/DevelopmentModules.htm#UMFT311EV&quot;&gt;UMFT311EV&lt;/a&gt; AOA evaluation board from FTDI. This board implements the full AOA
+protocol, and FTDI provides a &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.ftdi.j2xx.hyperterm&amp;amp;hl=en&quot;&gt;UART Terminal App&lt;/a&gt; which, if installed on an Android phone, will send data to a connected AOA
+device.&lt;/p&gt;
+
+&lt;p&gt;We used this app and evaluation board, and connected to the UART on the board
+to attempt bidirectional communication with the phone from a separate computer
+via the FTDI311 evaluation board, using AOA to the phone.&lt;/p&gt;
+
+&lt;h3 id=&quot;phones-tested-for-aoa-support&quot;&gt;Phones Tested for AOA Support&lt;/h3&gt;
+
+&lt;p&gt;This is a list of phones which we tested, where we indicate
+“AOA 1.0 Bidirectional Data Support” if the phone met the following criteria:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The phone immediately detects that an AOA accessory is plugged in, and
+prompts a relevant dialog upon insertion of the AOA&lt;/li&gt;
+  &lt;li&gt;We are able to receive data at our UART terminal connected to the FTDI
+evaluation board from the phone&lt;/li&gt;
+  &lt;li&gt;We are able to send data from our UART terminal to the phone through the
+FTDI evaluation board&lt;/li&gt;
+  &lt;li&gt;We do not have to modify any settings or configuration on the phone, it
+‘just works’&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the table below, APIs for all phones not supporting AOA are explicitly noted,
+as well as a few ‘newer’ models to indicate the firmware at time of testing.&lt;/p&gt;
+
+&lt;p&gt;Manufacturer&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Manufacturer&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Model&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;AOA 1.0 Bidirectional Data Support&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Alcatel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;918S (API 2.3.6)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Alcatel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4007D (API 2.3.6)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Alcatel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4015D&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Alcatel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4028S&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Alcatel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4032E Pop C2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Asus&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Zenfone&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Blu&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Dash 3.5 (API 2.3.5)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Blu&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Dash Jr K&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;(Unknown)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;FS358/WaterWorld67715~&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Huawei&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Ideos (API 2.2)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Huawei&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Honor 3x [G750-T00]&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Huawei&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Y221-U22&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Huawei&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Y330-U05&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Huawei&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Y336&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Infinix&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x351&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Itel&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;it1409&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Jivi&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;JSP20 (API 2.3.5)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;LG&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;E615&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Mi-Fone&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;MI-A403&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Google&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Pixel (API 7.1.2)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Motorola&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Moto G4 [Athene Core]&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Motorola&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Moto E2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Plum&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;X350&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Prestigio&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3540 DUO&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Samsung&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Galaxy Tab E SMT560-NU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Samsung&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;GT-S5380V (API 2.3.6)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Samsung&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;GT-3501L&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Samsung&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;JM-110H/DS&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Samsung&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;SM-361H/DS&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Tecno&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;P5S&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Tecno&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;W4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Tecno&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Y2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Tecno&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Y4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;~ The “FS358” is not labeled beyond the model, and simply reports an oem of
+“waterworld67715”&lt;/p&gt;
+
+&lt;p&gt;This is, of course, not comprehensive by any means – but intentionally skewed
+towards handsets that are deployed primarily in the developing world.&lt;/p&gt;
+
+&lt;p&gt;Note that all phones which did &lt;strong&gt;not&lt;/strong&gt; support AOA are pre API 3.1; which is
+expected.  So far, we have no evidence that phones newer than API 3.1 lack
+support for AOA.&lt;/p&gt;
+
+&lt;h3 id=&quot;future-support&quot;&gt;Future Support?&lt;/h3&gt;
+
+&lt;p&gt;It is unclear what the roadmap for AOA support moving forward looks like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Is there an AOA 3.0 with new features on the horizon?&lt;/li&gt;
+  &lt;li&gt;Is ‘keeping the status quo’ alive the way forward?
+or..&lt;/li&gt;
+  &lt;li&gt;Is AOA going to be unceremoniously chopped out at some point?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As ‘feel-good’ evidence for ongoing support, it’s nice that the Pixel clearly
+supports AOA (so, this functionality isn’t getting deprecated in today’s latest
+‘flagship’ handsets, at least).  It is also nice that all phones we tested with
+API &amp;gt;= 3.1 were fully supported.&lt;/p&gt;
+
+&lt;p&gt;Straight from the documentation itself, however, there is no guarantee
+that a given handset will have AOA support:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Because not all Android-powered devices are guaranteed to support the USB
+accessory APIs, include a &lt;uses-feature&gt; element that declares that your
+application uses the android.hardware.usb.accessory feature.&lt;/uses-feature&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://source.android.com/devices/accessories/aoa&quot;&gt;Android Open Accessory Protocol 1.0&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As for existing uses, a cursory search for commercial products using AOA turned
+up automotive head units (car stereos) supporting AOA.  A major online vendor
+in the space, Crutchfield, lists a specific section for &lt;a href=&quot;https://www.crutchfield.com/S-Cjr256pIBXL/fg_300_AG_Android_Control%7CFFAOA/Android-Control-AOA-Car-Stereos.html?tp=5684&quot;&gt;“Android Control AOA Car Stereos”&lt;/a&gt;.  This application appears to leverage the 
+streaming audio endpoints introduced in &lt;a href=&quot;https://source.android.com/devices/accessories/aoa2&quot;&gt;AOA V2&lt;/a&gt;.
+One can imagine wanting to pipe audio from a handset into a car stereo in
+higher fidelity than (non-AptX) Bluetooth can provide, but with some form of
+audio playback control.  In this, AOA seems to have found a pleasant market
+niche.&lt;/p&gt;
+
+&lt;p&gt;Will this still be supported on Android handsets being released in 2020?  No
+clear answers yet.&lt;/p&gt;
+
+&lt;p&gt;An interesting factoid discovered along the way – connecting to a phone via ADB,
+and executing &lt;code class=&quot;highlighter-rouge&quot;&gt;adb shell ls /system/etc/permissions | grep &quot;usb&quot;&lt;/code&gt; provides
+evidence of whether a phone can &lt;em&gt;potentially&lt;/em&gt; support AOA or USB OTG.  Specifically:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Presence of &lt;code class=&quot;highlighter-rouge&quot;&gt;android.hardware.usb.accessory.xml&lt;/code&gt; indicates AOA may be supported&lt;/li&gt;
+  &lt;li&gt;Presence of &lt;code class=&quot;highlighter-rouge&quot;&gt;android.hardware.usb.host.xml&lt;/code&gt; indicates USB OTG may be supported&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If the relevant XML file is &lt;em&gt;not&lt;/em&gt; present, the phone will not support the
+connection mode of interest.&lt;/p&gt;
+
+&lt;h3 id=&quot;additional-resources&quot;&gt;Additional Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://source.android.com/devices/accessories/aoa&quot;&gt;Android Open Accessory Protocol 1.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://source.android.com/devices/accessories/aoa2&quot;&gt;Android Open Accessory Protocol 2.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.csr.com/products/aptx&quot;&gt;“AptX High Quality Bluetooth Music Audio Codec”&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 08 May 2017 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/2017/05/08/Android-AOA-Support/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/08/Android-AOA-Support/</guid>
+        
+        
+      </item>
     
       <item>
         <title>The Basics - Certifying a Cellular Product in the US</title>
@@ -125,124 +433,6 @@ antenna is one way to reduce losses in the signal chain.&lt;/p&gt;
         <pubDate>Sat, 18 Mar 2017 00:00:00 -0700</pubDate>
         <link>http://localhost:4000/2017/03/18/Cellular-Certification-in-USA/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/03/18/Cellular-Certification-in-USA/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Embedded Gcc Beyond Wall</title>
-        <description>&lt;In progress=&quot;&quot;&gt;
-
----
-layout: post
-title: Embedded Code Quality -- Beyond `-Wall`
----
-
-While `gcc` can be used to find a number of possible problems using the `-Wall`
-and `-Werror` flags, additional linting and analysis tools can be used to
-catch addiitonal issues that are not noticed by gcc.  This post discusses
-a few options, and shows the general approach used to set up 
-the general approach used to set up `splint` to lint files in an embedded C
-project using `gcc` as the compiler.
-
------
-
-### Rationale
-
-We have an embedded C project, consisting of a number of different modules, and
-use `gcc` and `check` to compile the project and run unit tests against each
-module.  This is a fine approach, and we even get some additional coverage
-during the `gcc` compile process by using additional flags.  The flags we
-pass to `gcc` specifically in this build-for-unit-test process 
-(including a custom one you can ignore, `-DANGAZA_USE_DEFAULT_ASSERT`), are:
-
-```
-CFLAGS=\                                                                        
-    -Isrc/ -O0 -g -Wall -Wextra -Wno-unused-parameter -Wundef -Wuninitialized\  
-        -Winit-self -Wpedantic -Werror -Winline -std=c11 -DANGAZA_USE_DEFAULT_ASSERT -coverage
-```
-
-`-Wall` is a very valuable flag for knocking out potential bugs -- if you're
-able to compile your code using the `-Wall` flag and see no warnings, its
-a strong positive indicator for code quality.  In my daily work, we go a step
-further-- the `-Werror` flag is used to turn these warnings into errors, and
-prevent this questionable code from being checked into master.
-
-However, we can do more.  `splint` is one such tool, and Barr Group has an
-excellent [article](http://www.barrgroup.com/Embedded-Systems/How-To/Lint-Static-Analysis-Tool) on where to use lint in a design process (after the code is 
-compilable), and I won't repeat that discussion here (go read it, though).
-Personally, I've found `splint` to be a bit heavy-handed with our codebase,
-and the amount of work required to support it outweighed the potential issues
-it found.  It's worth a try, though -- if you find its manageable, use it.
-
-relevant link: https://coelhorjc.wordpress.com/2015/02/19/how-to-do-static-code-analysis-in-cc-using-sparse-splint-cpplint-and-clang/comment-page-1/
-
-### OS and Install
-
-If using a 'standard' Unix based OS (e.g. Ubuntu), its possible that`splint`
-is available using the usual `apt-get install splint` approach.  If not, you
-can find the source and install instructions [on the splint website](http://www.splint.org/source.html).
-
-
-
-Rationale
-
-### Step-By-Step
-
-1. Plug in the USB-&amp;gt;Serial adapter, and ensure that it shows up under `lsusb`, as well as creating a device entry similar to `/dev/ttyUSB*` .
-
-2.  Once the adapter is plugged in, execute `chmod 666 /dev/ttyUSB0` (substituting ttyUSB0 for whatever USB* port the adapter enumerated to) on the host machine.  Determine the adapter by observing what new entry is added to the output 
-of `ls /dev/ttyUSB*` when the adapter is plugged into the host machine.
-
-Alternately, ensure that the user running the VirtualBox on the host machine
-is in the `dialout` group (`sudo adduser $USER dialout`).  This requires a
-logut/login cycle to take effect.
-
-3. In the VM VirtualBox Manager GUI, go to &quot;Settings&quot; for the machine which
-will receive access to the serial port, and navigate to the &quot;Port 1&quot; tab under
-&quot;Serial Ports&quot;. Set &quot;Port Number&quot; to &quot;COM4&quot; (corresponding to a guest VM serial
-port of `/dev/ttyS3`), leave IRQ and I/O port as their defaults, select
-&quot;Host Device&quot; as the Port Mode, and type the path to the serial port device
-on the *Host* machine under &quot;Port/File Path&quot;.  In this example, this is
-`/dev/ttyUSB0`.
-
-![VirtualBox Serial Port Settings](/assets/images/Vbox_Serial_Port.png)
-
-4. On the guest `sudo adduser $USER dialout` will add the guest user to a group
-which has access to the serial port interfaces (e.g. /dev/ttyS*).  Execute this command, then log out and back into the guest machine.
-
-5. Ensure the TX/RX lines are connected together on the serial adapter for
-the next step (a loopback test from the guest VM).
-
-6. Log into two separate terminal sessions on the guest VM, in the first
-session, type `cat /dev/ttyS3`.  In the second terminal session, type
-`echo &quot;test&quot; &amp;gt; /dev/ttyS3`.  If the serial device from the host is being
-successfully passed through to the guest, &quot;test&quot; should appear in the window
-where `cat` is running.
-
-At this point, the guest VM has access to read and write to a USB serial adapter
-connected to the host machine.  Note that this approach does not require the
-guest VM to have any direct USB peripheral access to the host.
-
-## Asides
-
-* [`PySerial`](https://pypi.python.org/pypi/pyserial) is an extremely useful library for abstracting away most of the
-complexities involved with programmatically accessing a serial port for UART
-communications.
-
-* If also occasionally using the serial port outside of the virtual machine,
-note that if the virtual machine is currently accessing the serial port (e.g.
-the host is passing the serial port directly through to the VM) there will be
-problems attempting to use it on the host at the same time.
-
-* This approach might not be suitable for near-realtime response requirements
-on the serial lines.
-
-&lt;/In&gt;
-</description>
-        <pubDate>Mon, 02 Jan 2017 00:00:00 -0800</pubDate>
-        <link>http://localhost:4000/2017/01/02/embedded-gcc-beyond-wall/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/01/02/embedded-gcc-beyond-wall/</guid>
         
         
       </item>
