@@ -32,3 +32,4 @@ _site/
 .sass_cache/
 .jekyll-metadata
 .swp
+_site/*

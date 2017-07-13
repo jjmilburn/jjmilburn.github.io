@@ -9,7 +9,7 @@ author:
 markdown:     kramdown
 permalink:    pretty
 paginate:     10
-include: ['_pages']
+include:     ['_pages']
 
 # Google services
 google_analytics: UA-88387479-1
