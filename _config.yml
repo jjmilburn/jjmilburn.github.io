@@ -2,12 +2,14 @@ ttle:        'Unalarming Discursions'
 tagline:      ''
 description:  'Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.'
 url:          http://jjmilburn.github.io
-version:      0.9.0
+version:      1.0.0
 author:
   name:       'Josh Milburn'
   email:      'jay-j4y-milburn@gmail.com, change the first syllables to letters, and remove the marks.'
 markdown:     kramdown
 permalink:    pretty
 paginate:     10
+include: ['_pages']
+
 # Google services
 google_analytics: UA-88387479-1

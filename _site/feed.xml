@@ -5,9 +5,40 @@
     <description>Engineering Field Notes. Made by &lt;a href=&quot;http://electronics.stackexchange.com/users/31199/jjmilburn&quot; target=&quot;_blank&quot;&gt;@jjmilburn&lt;/a&gt;.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 09 May 2017 18:16:23 -0700</pubDate>
-    <lastBuildDate>Tue, 09 May 2017 18:16:23 -0700</lastBuildDate>
+    <pubDate>Wed, 12 Jul 2017 20:47:14 -0700</pubDate>
+    <lastBuildDate>Wed, 12 Jul 2017 20:47:14 -0700</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Embedded Reliability Blog Series (Angaza)</title>
+        <description>&lt;p&gt;A brief notice about a new blog series I’ll be authoring for Angaza.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Instead of posting the same content in both places, I’m including a link here
+to a &lt;a href=&quot;https://blog.angaza.com/reliable-bottom-of-pyramid-embedded-systems-cost-benefit-analysis-e0111f6d1e41&quot;&gt;new blog series&lt;/a&gt; I’ll be working
+on over the next few months.  It focuses on the testing philosophy and tooling we use for embedded projects at Angaza,
+and hopefully gives some insight into why we select the level of testing that we do.&lt;/p&gt;
+
+&lt;p&gt;I’ll also leave you with a fun factoid regarding embedded software at &lt;a href=&quot;https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20050081994.pdf&quot;&gt;NASA&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The Urine Processor Assembly (UPA) is part of the
+life support in the ISS. The UPA controller consists of
+47 KLOCs of C code.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Thats 8 KLOCs less than the Materials Science Research Rack, which exists to
+‘provide the common subsystems and interfaces required for the operation
+of experiment hardware, accomodate telescience capabilities, and provide
+the capability for simultaneous on-orbit processing.’&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jul 2017 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/2017/07/12/Angaza-Embedded-Reliability/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/12/Angaza-Embedded-Reliability/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Android Open Accessory Mode (AOA) Support in 2017</title>
