@@ -1,8 +1,8 @@
-ttle:        'Unalarming Discursions'
+title:        'Unalarming Discursions'
 tagline:      ''
-description:  'Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.'
+description:  'Embedded Engineering Field Notes. Made by <a href="http://electronics.stackexchange.com/users/31199/jjmilburn" target="_blank">@jjmilburn</a>.'
 url:          http://jjmilburn.github.io
-version:      1.0.0
+version:      1.1.0
 author:
   name:       'Josh Milburn'
   email:      'jay-j4y-milburn@protonmail.com, change the first syllables to letters, and remove the marks.'
