@@ -3,7 +3,7 @@ layout: post
 title: STM32 Interrupt Mask Register Concurrency
 ---
 
-Here we go again.  Another 
+How not to concurrently modify the IMR register on an STM32
 
 -----
 
@@ -38,10 +38,10 @@ And, lets assume the initial IMR state is that both A and B are active and the I
 
 While *unlikely*, it is theoretically possible that the following scenario occurs:
 
-0) IMR is initially set such that both interrupts A and B are active (`IMR=0b0011`)
-1) Interrupt A fires, and stores the value of `EXTI->IMR` to a temporary register. It then performs a bitwise ANDoperation on the temporary register using the value of `~PINOUT_EXTERNAL_HARDWARE_INTERRUPT_A`.  This temporary register takes on the value `0b0010`, masking interrupt "A".
-2) Before Interrupt A completes operation and stores the result back into `EXTI->IMR`, higher-priority interrupt B fires, and stores the value of `EXTI->IMR` to a temporary register.  Note that this temporary value is `IMR=0b0011`, since the modification intended by interrupt A has not yet been stored back in the hardware `EXTI->IMR` register.
-3) Interrupt B handler continues to execute, and masks out the "B" interrupt.  The resulting value of the IMR register is:
+0. IMR is initially set such that both interrupts A and B are active (`IMR=0b0011`)
+1. Interrupt A fires, and stores the value of `EXTI->IMR` to a temporary register. It then performs a bitwise ANDoperation on the temporary register using the value of `~PINOUT_EXTERNAL_HARDWARE_INTERRUPT_A`.  This temporary register takes on the value `0b0010`, masking interrupt "A".
+2. Before Interrupt A completes operation and stores the result back into `EXTI->IMR`, higher-priority interrupt B fires, and stores the value of `EXTI->IMR` to a temporary register.  Note that this temporary value is `IMR=0b0011`, since the modification intended by interrupt A has not yet been stored back in the hardware `EXTI->IMR` register.
+3. Interrupt B handler continues to execute, and masks out the "B" interrupt.  The resulting value of the IMR register is:
 
 `IMR == 0b0001`
 
