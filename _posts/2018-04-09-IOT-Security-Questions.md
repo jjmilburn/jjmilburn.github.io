@@ -78,7 +78,9 @@ the app and obtain the keys?  If they do, is your application security compromis
 
 **[Security through Obscurity](https://stackoverflow.com/questions/533965/why-is-security-through-obscurity-a-bad-idea)**
 
-These bullets draw out risks inherent in the system design, usually related to 'features' that
+These bullets draw out risks inherent in the system design, usually related to 'features' that are added for
+convenience in debugging or testing. If left in the system after release, these can represent a major security
+flaw.
 
 * Are there 'maintenance/test modes' that provide privileged access to the system, accessible without any
 unit-specific authentication?
