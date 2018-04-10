@@ -33,7 +33,7 @@ Similar to how there are static analyzer tools to help catch possible bugs in an
 considering what design rules/review questions are in place to reveal possible security weaknesses in the
 design/architecture phase of a project.
 
-Some of these 'IoT Device Security Review' questions I've found useful to date include:
+Some 'IoT Device Security Review' questions I've found useful to date include:
 
 **Crypto Basics**
 
