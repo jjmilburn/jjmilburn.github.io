@@ -1,6 +1,6 @@
 ---
 layout: post
-title: An Intro: IoT Hardware Platforms
+title: An Intro - IoT Hardware Platforms
 ---
 
 Selecting an interface to the physical world
