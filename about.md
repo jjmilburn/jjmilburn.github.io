@@ -6,7 +6,7 @@ permalink: /about/
 
 # About
 
-Josh Milburn is a [professional engineer](http://www2.dca.ca.gov/pls/wllpub/WLLQRYNA$LCEV2.QueryView?P_LICENSE_NUMBER=21831&P_LTE_ID=746)
+Josh Milburn is a [professional engineer](https://search.dca.ca.gov/details/7500/E/21831/0d5da92c0ab25c45f27e614c2ca54565)
 working on energy access problems with [Angaza](http://www.angaza.com).
 He enjoys the technical challenges of embedded development and
 mixed-signal design, and finds working with a distributed
